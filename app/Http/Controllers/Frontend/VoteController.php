@@ -18,10 +18,8 @@ class VoteController extends Controller
 
         $asset = EventParticipantsAsset::where('event_p_id','=',$request->id)->get();
         //dd($asset->toArray());
-        return view('frontend.vote',compact('asset'));
+        return view('frontend.vote');
     }
 
-    public function display_popup(Request $request){
-        $asset = EventParticipantsAsset::where('event_p_id','=',$request->id)->get();
-    }
+
 }

@@ -12,7 +12,7 @@
                             <h2>{{$event['title']}}</h2>
                         </div>
                         <ol class="breadcrumb">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
                             <li>|</li>
                             <li>Participants</li>
                         </ol>
@@ -41,31 +41,26 @@
             </div>
             <!-- /.row  end-->
             <div class="row mb50">
-                @foreach($participant_teams as $team)
+                @foreach($participant_teams as $index => $team)
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                     <div class="speakers xs-mb30">
                         <div class="">
+
                             @foreach($team['assets'] as $key => $asset)
-                                @if($key == 0)
                                     @if($asset['asset_type'] == 'image')
-                                    <a href="{{$asset['assets']}}" data-lightbox="roadtrip">
-                                    <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
-                                    </a>
-                                    @else
-                                        <a href="https://www.youtube.com/embed/sXmucZx5_ig" data-lightbox="roadtrip" style="display:none">
-                                        </a>
-                                    </a>
-                                    @endif
-                                @else
-                                    @if($asset['asset_type'] == 'image')
-                                        <a href="{{$asset['assets']}}" data-lightbox="roadtrip" style="display:none">
+                                        @if($key ==0)
+                                        <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}">
                                             <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
                                         </a>
-                                    @else
-                                        <a href="https://www.youtube.com/embed/sXmucZx5_ig" data-lightbox="roadtrip" style="display:none">
+                                        @else
+                                        <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}" style="display:none">
+                                            <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
                                         </a>
+                                        @endif
+                                    @else
+                                        <iframe width="250" height="180" src="https://www.youtube.com/embed/sXmucZx5_ig" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                        </iframe>
                                     @endif
-                                @endif
                             @endforeach
                             {{--<ul>--}}
                                 {{--<li><a href="#" style="color:red">Click</a></li>--}}
@@ -74,7 +69,7 @@
                             {{--</ul>--}}
                         </div>
                         <div class="spk-info">
-                            <h3>{{$team['team_name']}}</h3>
+                            <h3 style="font-size: 15px">{{$team['team_name']}}</h3>
                             <p>Captain,{{$team['contact_person']}}</p>
                             <button class="sub-btn">
                                 <a href="{{url('vote',$team['id'])}}">Vote</a>

@@ -14,10 +14,10 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Model\EventParticipantsAsset::class, function (Faker $faker) {
-    $asset_type = array("image", "video");
+    //$asset_type = array("image", "video");
     return [
         'event_p_id' => rand(1,25),
         'assets' => 'ganesha.jpg',
-        'asset_type' => $asset_type[array_rand($asset_type)],
+        'asset_type' => 'image',
     ];
 });
