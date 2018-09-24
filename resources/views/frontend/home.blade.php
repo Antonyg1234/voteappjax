@@ -81,7 +81,7 @@
                                     </th>
                                     <td>
                                         <div class="event-img">
-                                            <img src="{{('frontend/img/team/1.jpg')}}" alt="">
+                                            <img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">
                                         </div>
                                     </td>
                                     <td>
@@ -137,7 +137,7 @@
                                     </th>
                                     <td>
                                         <div class="event-img">
-                                            <img src="{{('frontend/img/team/2.jpg')}}" alt="">
+                                            <img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">
                                         </div>
                                     </td>
                                     <td>

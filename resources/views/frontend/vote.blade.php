@@ -68,7 +68,7 @@
                                             <div class="help-block with-errors"></div>
                                         </div>
 
-                                        <div class="btn-2">
+                                        <div class="btn-2 text-center">
                                             <button class="btn-primary" name="submit-form" type="submit">Send</button>
                                         </div>
                                     </form>

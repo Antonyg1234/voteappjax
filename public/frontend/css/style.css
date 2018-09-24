@@ -497,7 +497,10 @@ a {
   background-image: url(../img/slide/1.jpg); }
 
 .hero-bg-2 {
-  background-image: url(../images/ganesha-banner5.jpg); }
+  background-image: url(../images/ganesha.png); 
+  background-size: auto;
+  background-position: top;
+}
 
 .hero-bg-3 {
   background-image: url(../img/slide/3.jpg); }
@@ -1107,7 +1110,8 @@ a {
           .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a:hover {
             color: #4125dd; }
           .event-schedule-area-two .tab-content .table tbody tr td .event-wrap .organizers a:before {
-            content: "\f007";
+            /*content: "\f007";*/
+            content: "";
             font-family: fontawesome;
             padding-right: 5px; }
       .event-schedule-area-two .tab-content .table tbody tr td .primary-btn {
@@ -1233,7 +1237,7 @@ a {
       transform: translate3d(0, 0, 0); }
   .whos-speaking-area .speakers .spk-info {
     text-align: center;
-    padding: 30px 0; }
+    padding: 30px 15px; }
     .whos-speaking-area .speakers .spk-info h3 {
       color: #252525;
       font-size: 20px;
@@ -1695,13 +1699,13 @@ a {
   .contact-area .contact-form .btn-2 button.btn-primary {
     background-color: transparent;
     border: none;
-    padding: 15px 25px;
+    padding: 8px 25px;
     border-radius: 50px;
     background: #4125dd;
     color: #fff;
     cursor: pointer;
     outline: none;
-    width: 100%;
+    width: auto;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     transition: all 0.4s; }
@@ -2343,3 +2347,32 @@ a {
 
 .shop button {
   top: 10px !important; }
+
+.participants-cards{
+  display: flex;
+  margin:15px 0;
+}
+
+button.sub-btn.btn-primary {
+    /* background-color: transparent; */
+    border: none;
+    padding: 6px 25px;
+    border-radius: 50px;
+    /* background: #4125dd; */
+    /* color: #fff; */
+    cursor: pointer;
+    outline: none;
+    margin: 15px 0 0;
+    /* width: 100%; */
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+button.sub-btn.btn-primary a{
+  color:#fff;
+}
+
+.flex-itm-center{
+  align-items: center;
+}

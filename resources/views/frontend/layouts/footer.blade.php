@@ -5,7 +5,7 @@
             <div class="col-lg-5">
                 <div class="am">
                     <div class="f-logo">
-                        <img src="{{asset('frontend/img/logo/logo-2.png')}}" alt="">
+                        <img class="img-fluid" src="{{asset('frontend/img/logo/neoLogo.png')}}" alt="">
                     </div>
                     <div class="border-right"></div>
                 </div>

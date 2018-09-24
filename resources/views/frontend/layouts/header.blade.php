@@ -1,10 +1,10 @@
 <!--Header Start Here-->
 <header class="header base-style-2">
     <div class="container">
-        <div class="row">
+        <div class="row flex-itm-center">
             <div class="col-lg-2">
                 <div class="brand-logo">
-                    <a class="eventex-brand" href="{{url('/')}}"><img src="{{asset('frontend/images/neo.jpg')}}" alt=""></a>
+                    <a class="eventex-brand" href="{{url('/')}}"><img src="{{asset('frontend/images/neoLogo.png')}}" class="img-fluid" alt=""></a>
                 </div>
             </div>
             <!-- /col end-->

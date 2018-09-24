@@ -42,7 +42,7 @@
             <!-- /.row  end-->
             <div class="row mb50">
                 @foreach($participant_teams as $index => $team)
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 participants-cards">
                     <div class="speakers xs-mb30">
                         <div class="">
 
@@ -71,7 +71,7 @@
                         <div class="spk-info">
                             <h3 style="font-size: 15px">{{$team['team_name']}}</h3>
                             <p>Captain,{{$team['contact_person']}}</p>
-                            <button class="sub-btn">
+                            <button class="sub-btn btn-primary">
                                 <a href="{{url('vote',$team['id'])}}">Vote</a>
                             </button>
                         </div>
