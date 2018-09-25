@@ -497,9 +497,9 @@ a {
   background-image: url(../img/slide/1.jpg); }
 
 .hero-bg-2 {
-  background-image: url(../images/ganesha.png); 
+  background-image: url(../images/ganesha2.png); 
   background-size: auto;
-  background-position: top;
+  background-position: center center;
 }
 
 .hero-bg-3 {
@@ -522,7 +522,7 @@ a {
   background-position: top right; }
 
 .bg-footer {
-  background-image: url(../img/bg/footer.jpg); }
+  background-image: url(../img/bg/bg.png); }
 
 .bg-8 {
   background-image: url(../img/bg/4.jpg); }
@@ -536,13 +536,16 @@ a {
   background-size: cover; }
 
 .bg-counter {
-  background-image: url(../img/bg/5.jpg); }
+  background-image: url(../img/bg/bg.png); }
 
 .bg-contact {
-  background-image: url(../img/bg/6.jpg); }
+ /* background-image: url(../img/bg/6.jpg);*/ 
+ background-color: #949191; 
+ padding:40px 0;
+}
 
 .bg-about {
-  background-image: url(../img/bg/9.jpg); }
+  background-image: url(../img/bg/bg.png); }
 
 .bg-error {
   background-image: url(../img/bg/404.jpg); }
@@ -679,7 +682,7 @@ a {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-top: 31px; }
+    /*margin-top: 31px;*/ }
     .header ul li.header-ticket a {
       padding: 15px 30px !important;
       line-height: 0 !important;
@@ -770,19 +773,19 @@ a {
         font-size: 70px;
         font-weight: 700;
         line-height: 70px;
-        color: #4125dd;
+        color: #fff;
         text-align: center;
         background: transparent; }
         .hero-banner-area.home-2 .upcoming div .cdown p {
-          color: #4125dd;
+          color: #fff;
           display: block;
           font-weight: 600;
           margin-bottom: 0;
           margin-top: 10px; }
       .hero-banner-area.home-2 .upcoming div span:nth-child(even) {
-        color: #8708c2; }
+        color: #fff; }
         .hero-banner-area.home-2 .upcoming div span:nth-child(even) p {
-          color: #8708c2; }
+          color: #fff; }
   .hero-banner-area.home-2 .banner-content {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -796,14 +799,16 @@ a {
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
+   /* align-items: center;*/
+   align-items: flex-end;
     height: 100vh; }
     .hero-banner-area.home-2 .banner-content h3 {
       font-size: 50px;
-      color: #252525;
+      color: #fff;
       font-weight: 700;
       line-height: 2em;
-      text-transform: uppercase; }
+      padding:0 50px;
+      text-transform: uppercase; padding-right:45px;}
 
 /*Home Page 4 hero banner Start*/
 .home-4 .banner-content {
@@ -1128,7 +1133,11 @@ a {
   -o-transition: all 0.4s;
   transition: all 0.4s;
   border: 1px solid #dee2e6;
-  border-radius: 6px; }
+  border-radius: 6px; 
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
   .whos-speaking-area .speakers:hover {
     -webkit-box-shadow: 0 0 6px 5px #ddd;
     box-shadow: 0 0 6px 5px #ddd;
@@ -1617,7 +1626,7 @@ a {
 .contact-us-area-two .inner-box {
   background: #fff;
   padding: 40px 0 0;
-  min-height: 470px; }
+  min-height: 470px; border-radius:10px;}
   .contact-us-area-two .inner-box form input.form-control {
     padding: 0 30px 5px;
     border: none;
@@ -1773,7 +1782,7 @@ a {
 
 .footer-area .f-content:before {
   content: "";
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #fff;
   position: absolute;
   height: 100%;
   width: 1px;
@@ -1786,7 +1795,7 @@ a {
   display: flex; }
   .footer-area .f-content .inner-content .f-icon i.fa {
     font-size: 30px;
-    color: #4125dd;
+    color: #fff;
     margin-right: 15px; }
   .footer-area .f-content .inner-content span {
     font-size: 15px;
@@ -2376,3 +2385,5 @@ button.sub-btn.btn-primary a{
 .flex-itm-center{
   align-items: center;
 }
+
+.cards-flex{ display:flex; }

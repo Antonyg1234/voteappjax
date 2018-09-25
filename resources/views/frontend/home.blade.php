@@ -4,7 +4,7 @@
 @section('main-content')
 <!--Hero Banner Area Start Here-->
 <div class="hero-banner-area home-2 hero-bg-2 parallax no-attm">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="banner-content">
@@ -198,7 +198,7 @@
         </div>
         <!-- /.row  end-->
         <div class="row mb50">
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers xs-mb30">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/1.jpg')}}" alt="trainer-img">
@@ -218,7 +218,7 @@
                 </div>
             </div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers xs-mb30">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/2.jpg')}}" alt="trainer-img">
@@ -238,7 +238,7 @@
                 </div>
             </div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers xs-mb30">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/3.jpg')}}" alt="trainer-img">
@@ -258,7 +258,7 @@
                 </div>
             </div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 d-md-none d-lg-block col-sm-12">
+            <div class="col-xl-3 col-lg-3 d-md-none d-lg-block col-sm-12  cards-flex">
                 <div class="speakers">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/4.jpg')}}" alt="trainer-img">
@@ -283,7 +283,7 @@
         <div class="row">
             <div class="offset-2 no-gutter"></div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers xs-mb30">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/5.jpg')}}" alt="trainer-img">
@@ -303,7 +303,7 @@
                 </div>
             </div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers xs-mb30">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/6.jpg')}}" alt="trainer-img">
@@ -323,7 +323,7 @@
                 </div>
             </div>
             <!-- /col end-->
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12  cards-flex">
                 <div class="speakers">
                     <div class="spk-img">
                         <img class="img-fluid" src="{{('frontend/img/team/7.jpg')}}" alt="trainer-img">

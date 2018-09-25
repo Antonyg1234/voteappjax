@@ -85,11 +85,11 @@
 
                                     <div id="wrapper"></div>
 
-                                    <div class="btn-2" id="add_members">
-                                        <button class="btn-info" type="button">+ Add Members</button>
+                                    <div class="btn-2 text-center" id="add_members">
+                                        <button class="btn-primary" type="button">+ Add Members</button>
                                     </div>
 
-                                    <div class="btn-2">
+                                    <div class="btn-2 text-center">
                                         <button class="btn-primary" name="submit-form" type="submit">Send</button>
                                     </div>
                                 </form>
