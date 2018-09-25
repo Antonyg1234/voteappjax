@@ -11,11 +11,6 @@
                         <div class="section-title text-center">
                             <h2>{{$event['title']}}</h2>
                         </div>
-                        <ol class="breadcrumb">
-                            <li><a href="{{url('/')}}">Home</a></li>
-                            <li>|</li>
-                            <li>Participants</li>
-                        </ol>
                     </div>
                 </div>
                 <!-- /col-->
@@ -69,7 +64,7 @@
                             {{--</ul>--}}
                         </div>
                         <div class="spk-info">
-                            <h3 style="font-size: 15px">{{$team['team_name']}}</h3>
+                            <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
                             <p>Captain,{{$team['contact_person']}}</p>
                             <button class="sub-btn btn-primary">
                                 <a href="{{url('vote',$team['id'])}}">Vote</a>
