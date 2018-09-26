@@ -58,6 +58,7 @@
 
                                         <div class="btn-2 text-center">
                                             <button class="btn-primary" id="otp_submit" name="submit-form" type="">Send</button>
+                                            <button class="btn-primary" id="otp_resend" name="submit-form" type="">Resend</button>
                                         </div>
                                     </form>
                                     <div id="msgalert" class="hidden"></div>

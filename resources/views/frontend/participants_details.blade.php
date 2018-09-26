@@ -58,9 +58,11 @@
                         {{--<li><a href="#"><i class="fa fa-camera"></i></a></li>--}}
                         {{--</ul>--}}
                         {{--</div>--}}
-                        <button class="sub-btn btn-primary">
-                            <a href="{{url('vote',$details['id'])}}">Vote</a>
-                        </button>
+                        @if(!$event['vote_end_date'])
+                            <button class="sub-btn btn-primary">
+                                <a href="{{url('vote',$details['id'])}}">Vote</a>
+                            </button>
+                        @endif
                     </div>
                 </div>
                 <!-- /.col end-->

@@ -29,6 +29,12 @@
                     <div class="section-title text-center">
                         <div class="title-text mb50">
                             <h2>All Participants</h2>
+                            <br>
+                            @if($event['vote_end_date'])
+                                <button class="sub-btn btn-primary">
+                                    <a href="">View Result</a>
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -66,9 +72,11 @@
                         <div class="spk-info">
                             <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
                             <p>Captain,{{$team['contact_person']}}</p>
-                            <button class="sub-btn btn-primary">
-                                <a href="{{url('vote',$team['id'])}}">Vote</a>
-                            </button>
+                            @if(!$event['vote_end_date'])
+                                <button class="sub-btn btn-primary">
+                                    <a href="{{url('vote',$team['id'])}}">Vote</a>
+                                </button>
+                            @endif
                         </div>
                         <div style="display: none">
                             @foreach($team['assets'] as $asset)
