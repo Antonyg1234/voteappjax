@@ -8,6 +8,7 @@ use App\Model\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use session;
+use DB;
 
 class VoteController extends Controller
 {
@@ -23,32 +24,67 @@ class VoteController extends Controller
 
     public function post(Request $request){
 
+
         if ($request->ajax()) {
-            if ($this->validate($request,
-                ['email' => 'required|email'])) {
 
-                $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->first();
+            if(!$request->resend_flag){
+                if ($this->validate($request,
+                    ['email' => 'required|email'])) {
 
-                //print_r($vote);
-                //echo $request->event_id ;die();
+                    $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->first();
+
+                    //api call
+                    //echo "api called and we got otp as response";
+                    if(!$vote){
+                        $otp = '12345';
+                        if($otp != ''){
+                            $voterDeatails = array();
+                            $voterDeatails['email'] = $request->email;
+                            $voterDeatails['event_id'] = $request->event_id;
+                            $voterDeatails['event_p_id'] = $request->event_p_id;
+                            $voterDeatails['otp'] = $otp;
+                            Vote::create($voterDeatails);
+                            session(['otp'=>1]);
+                            session(['user_email'=>$request->email]);
+
+
+                            return response()->json(array(
+                                'success' => true,
+                                'message'=>'OTP sent to your mobile. Please enter sent otp below.'
+                            ));
+                        }else {
+                            return response()->json(array(
+                                'success' => false,
+                                'message' => 'OTP could not be sent.'
+
+                            ));
+                        }
+                    }else{
+                        return response()->json(array(
+                            'success' => false,
+                            'voted' => 'Sorry, You have voted already.'
+
+                        ));
+                    }
+                }else{
+                    return response()->json(array(
+                        'success' => false,
+                        'errors' => $this->validate->getMessageBag()->toArray()
+
+                    ));
+                }
+            }else{
                 //api call
                 //echo "api called and we got otp as response";
-                if(!$vote){
-                    $otp = '12345';
+                    $otp = '546899';
                     if($otp != ''){
-                        $voterDeatails = array();
-                        $voterDeatails['email'] = $request->email;
-                        $voterDeatails['event_id'] = $request->event_id;
-                        $voterDeatails['event_p_id'] = $request->event_p_id;
-                        $voterDeatails['otp'] = $otp;
-                        Vote::create($voterDeatails);
-                        session(['otp'=>1]);
-                        session(['user_email'=>$request->email]);
-
+                        Vote::where('event_id', '=', $request->event_id)
+                            ->where('event_p_id','=',$request->event_p_id)
+                            ->update(array('otp' => $otp));
 
                         return response()->json(array(
                             'success' => true,
-                            'message'=>'OTP sent to your mobile. Please enter sent otp below.'
+                            'message'=>'OTP resent to your mobile. Please enter sent otp below.'
                         ));
                     }else {
                         return response()->json(array(
@@ -57,19 +93,7 @@ class VoteController extends Controller
 
                         ));
                     }
-                }else{
-                    return response()->json(array(
-                        'success' => false,
-                        'voted' => 'Sorry, You have voted already.'
 
-                    ));
-                }
-            }else{
-                return response()->json(array(
-                    'success' => false,
-                    'errors' => $this->validate->getMessageBag()->toArray()
-
-                ));
             }
         }
     }
@@ -81,16 +105,18 @@ class VoteController extends Controller
                 'otp' => 'required|numeric|digits:6',
             ])){
                 //api call for matched otp
-
                 $email = session()->get('user_email');
 
                 Vote::where('email', '=', $email)->update(array('vote' => '1','otp' => NULL));
+
+                DB::table('event_participants')->where('id' , $request->event_p_id)->where('event_id' , $request->event_id)->increment('vote_count', 1);
 
                 session()->forget('otp');
                 session()->forget('user_email');
 
                 return response()->json(array(
                     'success' => true,
+                    'event_id'=> $request->event_id,
                     'message'=>'You have voted successfully'                ));
             }
             else{
