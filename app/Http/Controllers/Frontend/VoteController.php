@@ -27,12 +27,13 @@ class VoteController extends Controller
             if ($this->validate($request,
                 ['email' => 'required|email'])) {
 
-                $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->get();
+                $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->first();
 
+                //print_r($vote);
                 //echo $request->event_id ;die();
                 //api call
                 //echo "api called and we got otp as response";
-//                if(!$vote){
+                if(!$vote){
                     $otp = '12345';
                     if($otp != ''){
                         $voterDeatails = array();
@@ -45,13 +46,30 @@ class VoteController extends Controller
                         session(['user_email'=>$request->email]);
 
 
-                        return json_encode(array('message'=>'OTP sent to your mobile. Please enter sent otp below.'));
+                        return response()->json(array(
+                            'success' => true,
+                            'message'=>'OTP sent to your mobile. Please enter sent otp below.'
+                        ));
                     }else {
-                        echo "OTP could not be sent";
+                        return response()->json(array(
+                            'success' => false,
+                            'message' => 'OTP could not be sent.'
+
+                        ));
                     }
-//                }else{
-//                    return json_encode(array('error'=>'You have already voted.'));
-//                }
+                }else{
+                    return response()->json(array(
+                        'success' => false,
+                        'voted' => 'Sorry, You have voted already.'
+
+                    ));
+                }
+            }else{
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $this->validate->getMessageBag()->toArray()
+
+                ));
             }
         }
     }
@@ -71,9 +89,16 @@ class VoteController extends Controller
                 session()->forget('otp');
                 session()->forget('user_email');
 
-                return json_encode(array('message'=>'You have voted successfully'));
+                return response()->json(array(
+                    'success' => true,
+                    'message'=>'You have voted successfully'                ));
+            }
+            else{
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $this->validate->getMessageBag()->toArray()
 
-
+                ));
             }
         }
 

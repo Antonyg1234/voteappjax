@@ -50,6 +50,7 @@
                                     <form id="otp-form" data-toggle="validator" action="javascript:void(0)" style="display: none" role="form" method="POST">
                                         {{--<div id="error"></div>--}}
                                         {{--<div id="success"></div>--}}
+                                        <sapn>Please enter OTP below :</sapn>
                                         <div class="form-group">
                                             <input id="otp" type="text" name="otp" class="form-control" placeholder="Enter OTP" >
                                             <div class="help-block with-errors"></div>
@@ -60,6 +61,7 @@
                                         </div>
                                     </form>
                                     <div id="msgalert" class="hidden"></div>
+                                    <span>Note : One user can vote only once</span>
                                 </div>
                             </div>
                             <!-- /col-->

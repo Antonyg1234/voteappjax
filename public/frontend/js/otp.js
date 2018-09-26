@@ -10,6 +10,7 @@ $(document).ready(function() {
         var event_p_id = $('#event_praticipants_id').val();
         var event_id = $('#event_id').val();
 
+        $('#error').html('');
 
 
         $.ajaxSetup({
@@ -23,10 +24,17 @@ $(document).ready(function() {
             data : {email :email,event_p_id :event_p_id,event_id :event_id},
             dataType: 'json',
             success: function (response) {
-                $('#success').html('');
-                $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
-                $('#otp-form').show();
-                $('#contact-form').hide();
+
+                if(response.success == false){
+                    $('#error').html('');
+                    $('#error').append('<div class="alert alert-danger">'+response.voted+'</div>');
+
+                }else{
+                    $('#success').html('');
+                    $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
+                    $('#otp-form').show();
+                    $('#contact-form').hide();
+                }
 
             },
             error: function (xhr) {
@@ -39,6 +47,7 @@ $(document).ready(function() {
     })
 
         $('#otp_submit').click(function() {
+            $('#error').val('');
 
             var otp = $('#otp').val();
             $.ajaxSetup({
@@ -52,20 +61,24 @@ $(document).ready(function() {
                 data : {otp:otp},
                 dataType: 'json',
                 success: function (response) {
+                    $('#otp,#email').val('');
                     $('#success').html('');
                     $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
+                    $('#error').html('');
                     $('#otp-form').hide();
                     $('#contact-form').show();
 
                 },
-                error: function (xhr,response) {
-                    $('#error').html('');
-                    $('#error').append('<div class="alert alert-danger">'+response.error+'</div>');
-                    $('#error').html('');
-                    $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                    });
-                }
+                error:
+                    function (xhr) {
+
+                    alert('errors');
+                        $.each(xhr.responseJSON.errors, function(key,value) {
+                            $('#error').append('<div class="alert alert-danger">'+value+'</div>');
+                        });
+
+                    }
+
             });
         });
 
