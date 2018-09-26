@@ -14,12 +14,8 @@
                     </div>
                     <h3>Neosoft Ganesh</h3>
                 </div>
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        <ul>
-                            <li>{!! session()->get('success') !!}</li>
-                        </ul>
-                    </div>
+                @if ( session()->has('success') )
+                    <div class="alert alert-success">{{ session()->get('success') }}</div>
                 @endif
             </div>
             <!-- /col end-->
