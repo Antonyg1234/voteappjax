@@ -79,7 +79,7 @@ class RegisterController extends Controller
             $event_members->save();
         }
 
-        return redirect('/')->with('success', ['You have been registered successfully']);
+        return redirect('/')->with('success','You have been registered successfully');
     }
 
     /**
