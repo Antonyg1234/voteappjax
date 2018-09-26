@@ -10,6 +10,7 @@
                     <div class="about-content">
                         <div class="section-title text-center">
                             <h2>{{$event['title']}}</h2>
+                            <p>{{$event['description']}}</p>
                         </div>
                     </div>
                 </div>
@@ -29,10 +30,10 @@
                     <div class="section-title text-center">
                         <div class="title-text mb50">
                             <h2>All Participants</h2>
-                            <br>
+                            <br><br>
                             @if($event['vote_end_date'])
                                 <button class="sub-btn btn-primary">
-                                    <a href="">View Result</a>
+                                    <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
                             @endif
                         </div>

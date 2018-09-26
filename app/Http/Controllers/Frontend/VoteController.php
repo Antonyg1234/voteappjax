@@ -16,7 +16,7 @@ class VoteController extends Controller
 
         $event_participant = EventParticipant::from('event_participants as ep')
             ->join('event_masters as em','em.id','=','ep.event_id')
-            ->select('ep.id as participants_id','em.id as event_id','em.title as event_title','ep.team_name')
+            ->select('ep.id as participants_id','em.id as event_id','em.title as event_title','em.description as description','ep.team_name')
             ->where('ep.id','=',$request->id)->first();
         //dd($event_participant->toArray());
         return view('frontend.vote',compact('event_participant'));
@@ -132,6 +132,8 @@ class VoteController extends Controller
 //
 //        return back()->with('success','you have voted successfully');
     }
+
+
 
 
 }

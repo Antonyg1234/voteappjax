@@ -17,11 +17,14 @@ Route::get('/', 'Frontend\HomeController@index');
 //Participants Route
 Route::get('participants/{id}', 'Frontend\ParticipantController@index');
 Route::get('participants/details/{id}','Frontend\ParticipantController@details');
+Route::get('participants/result/{id}','Frontend\ParticipantController@result');
 
 //Vote Participants
 Route::get('vote/{id}','Frontend\VoteController@index');
 Route::post('vote/post','Frontend\VoteController@post');
 Route::post('vote/otp','Frontend\VoteController@otp');
+
+
 //Route::post('vote/post',['as'=>'vote.post','uses'=>'Frontend\VoteController@post']);
 
 
