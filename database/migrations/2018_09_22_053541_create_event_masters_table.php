@@ -18,6 +18,7 @@ class CreateEventMastersTable extends Migration
             $table->string('title',250);
             $table->text('description');
             $table->string('image');
+            $table->dateTime('voting_end_date');
             $table->dateTime('event_date');
             $table->text('location');
             $table->timestamps();

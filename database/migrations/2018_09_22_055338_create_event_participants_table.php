@@ -22,6 +22,7 @@ class CreateEventParticipantsTable extends Migration
             $table->string('contact_person');
             $table->string('email');
             $table->string('mobile');
+            $table->integer('vote_count')->default(0);
             $table->timestamps();
         });
     }
