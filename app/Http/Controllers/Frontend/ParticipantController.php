@@ -46,11 +46,11 @@ class ParticipantController extends Controller
     public function result($event_id){
         $event = EventMaster::where('id','=',$event_id)->first();
 
-        $winners = EventParticipant::where('event_id',$event_id)
+        $winners = EventParticipant::where('event_id',$event_id)->where('vote_count','<>',0)
             ->orderBy('vote_count', 'desc')
             ->take(2)
             ->get();
-
+//            die($winners);
         foreach($winners as $winner){
             $member = EventParticipantsMember::select('name')->where('event_id',$winner->event_id)->where('event_p_id',$winner->id)->get();
             $winner['members'] = $member->toArray();
