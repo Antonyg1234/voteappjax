@@ -40,46 +40,68 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-//        foreach($request->names as $key => $mobile){
-//            echo $mobile;echo '<br>';
-//            echo $request->mobiles[$key];echo '<br>';
-//            echo $request->emails[$key];echo '<br>';
-//        }
-//        die('');
-       // dd(Input::all());
-        $this->validate($request,[
-            'team_name' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'contact_person' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'required|digits:10|numeric',
-            'mobiles.*' => 'required|digits:10|numeric',
-        ]);
+        if($request->ajax()){
 
-        $event = new EventParticipant();
-        $event->event_id = $request->event_id;
-        $event->team_name = $request->team_name;
-        $event->title = $request->title;
-        $event->description = $request->description;
-        $event->contact_person = $request->contact_person;
-        $event->email = $request->email;
-        $event->mobile = $request->mobile;
-        $event->save();
+//            print_r($request->allmembers);die();
 
-        $event_p_id = $event->id;
+            if($this->validate($request,[
+                'team_name' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+                'contact_person' => 'required',
+                'email' => 'required|email',
+                'mobile' => 'required|digits:10|numeric',
+            ])){
 
-        foreach($request->names as $key => $name){
-            $event_members = new EventParticipantsMember();
-            $event_members->event_p_id = $event_p_id;
-            $event_members->event_id = $request->event_id;
-            $event_members->name = $name;
-            $event_members->email = $request->emails[$key];
-            $event_members->mobile = $request->mobiles[$key];
-            $event_members->save();
+                $email_availablity_as_contact_person = EventParticipant::where('email',$request->email)
+                    ->where('event_id',$request->event_id)
+                    ->get()
+                    ->count();
+
+                $email_availablity_as_member = EventParticipantsMember::where('email',$request->email)
+                    ->where('event_id',$request->event_id)
+                    ->get()
+                    ->count();
+
+                if($email_availablity_as_contact_person == 0 && $email_availablity_as_member == 0){
+
+                    $event_participant = new EventParticipant();
+                    $event_participant->event_id = $request->event_id;
+                    $event_participant->team_name = $request->team_name;
+                    $event_participant->title = $request->title;
+                    $event_participant->description = $request->description;
+                    $event_participant->contact_person = $request->contact_person;
+                    $event_participant->email = $request->email;
+                    $event_participant->mobile = $request->mobile;
+                    $event_participant->save();
+
+                    $event_p_id = $event_participant->id;
+
+                    if($request->allmembers){
+                        $members = json_decode($request['allmembers'],true);
+
+                        foreach($members as $member){
+                            $event_members = new EventParticipantsMember();
+                            $event_members->event_p_id = $event_p_id;
+                            $event_members->event_id = $request->event_id;
+                            $event_members->name = $member['member_name'];
+                            $event_members->email = $member['member_email'];
+                            $event_members->mobile = $member['member_mobile'];
+                            $event_members->save();
+                        }
+                    }
+                    return response()->json(array(
+                        'success' => true,
+                        'message'=>'You have been registered successfully for this event.'
+                    ));
+                }else{
+                    return response()->json(array(
+                        'success' => false,
+                        'message' => 'Sorry, Team Contact person already have been registered'
+                    ));
+                }
+            }
         }
-
-        return redirect('/')->with('success','You have been registered successfully');
     }
 
     /**
@@ -128,5 +150,33 @@ class RegisterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkEmailExistence(Request $request)
+    {
+        $email_availablity_as_contact_person = EventParticipant::where('email',$request->memberEmail)
+            ->where('event_id',$request->eventId)
+            ->get()
+            ->count();
+
+        $email_availablity_as_member = EventParticipantsMember::where('email',$request->memberEmail)
+            ->where('event_id',$request->eventId)
+            ->get()
+            ->count();
+
+        if($email_availablity_as_contact_person == 0 && $email_availablity_as_member == 0){
+
+            return response()->json(array(
+                'success' => true,
+                'message' => 'Member Added Successfully.'
+
+            ));
+        }else {
+            return response()->json(array(
+                'success' => false,
+                'message' => 'Member Email already register for this event.'
+
+            ));
+        }
     }
 }

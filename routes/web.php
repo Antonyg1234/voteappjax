@@ -29,4 +29,5 @@ Route::post('vote/otp','Frontend\VoteController@otp');
 
 
 //Register
+Route::post('register/checkemail', 'Frontend\RegisterController@checkEmailExistence');
 Route::resource('register','Frontend\RegisterController');
