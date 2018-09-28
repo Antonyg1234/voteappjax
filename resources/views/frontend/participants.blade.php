@@ -31,6 +31,9 @@
                         <div class="title-text mb50">
                             <h2>All Participants</h2>
                             <br><br>
+                            @if ( session()->has('success') )
+                                <div class="alert alert-success">{{ session()->get('success') }}</div>
+                            @endif
                             @if($event['vote_end_date'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
