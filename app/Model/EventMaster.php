@@ -19,13 +19,19 @@ class EventMaster extends Model
        return $date_time;
     }
 
-    public function getVoteEndDateAttribute($value){
+    public function getVotingEndDateAttribute($value){
         $now = Carbon::now();
         //returning true if voting date over.
         if($value < $now){
-            return true;
+            $date = array();
+            $date['date'] = $value;
+            $date['smaller'] = 1;
+            return $date;
         }else{
-            return false;
+            $date = array();
+            $date['date'] = $value;
+            $date['smaller'] = 0;
+            return $date;
         }
     }
 }

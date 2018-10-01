@@ -21,7 +21,8 @@ class ParticipantController extends Controller
             $team['assets'] = $assets->toArray();
         }
 
-        $event = EventMaster::where('id','=',$request->id)->first();
+        $event = EventMaster::where('id','=',$request->id)->first()->toArray();
+//        dd($event);
 
         return view('frontend.participants',compact('participant_teams','event'));
     }

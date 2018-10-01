@@ -31,16 +31,15 @@
                         <div class="title-text mb50">
                             <h2>All Participants</h2>
                             <br><br>
-
                             @if ( session()->has('success') )
                                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                             @endif
-                            @if(application_date_format($event['voting_end_date']) > date('yyyy-mm-dd'))
+                            @if($event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
                             @else
-                                <p>Last date for voting is {{application_date_format($event['voting_end_date'])}}</p>
+                                <p>Last date for voting is {{application_date_format($event['voting_end_date']['date'])}}</p>
                             @endif
                         </div>
                     </div>
@@ -79,7 +78,7 @@
                         <div class="spk-info">
                             <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
                             <p>Captain,{{$team['contact_person']}}</p>
-                            @if(!$event['vote_end_date'])
+                            @if(!$event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('vote',$team['id'])}}">Vote</a>
                                 </button>
