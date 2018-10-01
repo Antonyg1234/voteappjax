@@ -42,6 +42,10 @@
                                             <input id="email" type="text" name="email" class="form-control" placeholder="Enter Email" >
                                             <div class="help-block with-errors"></div>
                                         </div>
+                                        <div class="form-group">
+                                            <input id="password" type="password" name="password" class="form-control" placeholder="Enter password" >
+                                            <div class="help-block with-errors"></div>
+                                        </div>
 
                                         <div class="btn-2 text-center">
                                             <button class="btn-primary" id="email_submit" name="submit-form" type="">Send</button>

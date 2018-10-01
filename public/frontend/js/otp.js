@@ -55,7 +55,7 @@ $(document).ready(function() {
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
                     $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                    $('#error').fadeOut(3000);
+                    $('#error').fadeOut(1000);
 
                 });
             },
@@ -80,7 +80,7 @@ $(document).ready(function() {
                     $('#success').html('');
                     $('#success').fadeIn();
                     $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
-                    $('#success').fadeOut(3000);
+                    $('#success').fadeOut(10000);
                     $('#error').html('');
                     $('#otp-form').hide();
                     $('#contact-form').show();
@@ -92,7 +92,7 @@ $(document).ready(function() {
                         $.each(xhr.responseJSON.errors, function(key,value) {
                             $('#error').fadeIn();
                             $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                            $('#error').fadeOut(3000);
+                            $('#error').fadeOut(50000);
 
                         });
 
@@ -103,7 +103,6 @@ $(document).ready(function() {
     $('#otp_resend').click(function() {
 
         var resend_flag = 1;
-        alert(resend_flag)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

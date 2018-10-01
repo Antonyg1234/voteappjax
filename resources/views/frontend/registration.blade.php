@@ -57,7 +57,7 @@
                                     {{--@endif--}}
                                     <input type="hidden" name="event_id" id="event_id" value="{{$event['id']}}">
                                     <div class="form-group ">
-                                        <input id="team_name" type="text" name="team_name" value="{!! old('team_name') !!}" class="{{ $errors->has('team_name') ? 'alert alert-danger' : ''}} form-control" placeholder="Team Name" >
+                                        <input id="team_name" type="text" name="team_name" value="{!! old('team_name') !!}" class="{{ $errors->has('team_name') ? 'alert alert-danger' : ''}} form-control" placeholder="Team Name" required>
                                         {!! $errors->first('team_name', '<p class="help-block">:message</p>') !!}
                                         <p id="team_name_error"></p>
                                     </div>
@@ -82,7 +82,7 @@
                                         <p id="leader_email_error"></p>
                                     </div>
                                     <div class="form-group">
-                                        <input id="mobile" type="text" name="mobile" value="{!! old('mobile') !!}" class="{{ $errors->has('mobile') ? 'alert alert-danger' : ''}} form-control" placeholder="Mobile" >
+                                        <input id="mobile" type="number" min="0" name="mobile" value="{!! old('mobile') !!}" class="{{ $errors->has('mobile') ? 'alert alert-danger' : ''}} form-control" placeholder="Mobile" >
                                         {!! $errors->first('mobile', '<p class="help-block">:message</p>') !!}
                                         <p id="mobile_error"></p>
                                     </div>
@@ -100,7 +100,7 @@
                                             <p class="" id="member_email_error"></p>
                                         </div>
                                         <div class="form-group">
-                                            <input id="member_mobile" type="text" name="member_mobile" value="{!! old('member_mobile') !!}" class="member form-control" placeholder="Member Mobile" >
+                                            <input id="member_mobile" type="number" min="0" name="member_mobile" value="{!! old('member_mobile') !!}" class="member form-control" placeholder="Member Mobile" >
                                             <p class="" id="member_mobile_error"></p>
                                         </div>
                                     </div>

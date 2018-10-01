@@ -63,7 +63,7 @@
                                         </a>
                                         @endif
                                     @else
-                                        <iframe width="250" height="180" src="https://www.youtube.com/embed/sXmucZx5_ig" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                        <iframe width="250" height="180" src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                                         </iframe>
                                     @endif
                             @endforeach

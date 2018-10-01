@@ -1,7 +1,8 @@
 $(document).ready(function() {
-
     $('#registration_submit').click(function() {
 
+
+        var memberEmail = $('#member_email').val();
         $('.member').children().val('');
         // alert('asdasd');
         var teamName = $("#team_name").val();
@@ -19,7 +20,7 @@ $(document).ready(function() {
         var contactperson_validate = contactPersonValidate();
         var mobile_validate = mobileValidate();
         var email_validate = emailValidate();
-
+        var availabilty_validate = contactPersonAvailabilty();
 
         // var members = jQuery.parseJSON(allmembers);
         // alert(members.length);
@@ -48,6 +49,44 @@ $(document).ready(function() {
                 return true;
             }
         }
+
+        function contactPersonAvailabilty(){
+            var contact_person_email = $('#email').val();
+            alert(contact_person_email);
+            if(allmembers){
+                var members = jQuery.parseJSON(allmembers);
+                alert(members.length);
+                for (var i=0 ; i < members.length ; i++)
+                {
+                    alert(members[i].member_email);
+                    if (members[i].member_email == contact_person_email) {
+                        var check = true;
+                    }else {
+                        var check = false;
+                       continue;
+                    }
+                }
+                if(check == true){
+                    alert('available');
+                    $("#error").html("");
+                    $("#error").removeClass("alert alert-danger");
+                    return true;
+                }else{
+                    alert('not available');
+                    $("#error").html("Contact person not added as member.");
+                    $("#error").addClass("alert alert-danger");
+                    return false;
+                }
+            }else{
+                alert('PLease add');
+                $("#error").html("Please add team members");
+                $("#error").addClass("alert alert-danger");
+                return false;
+
+            }
+        }
+
+
 
         function titleValidate() {
             var name = /^[A-Za-z]+$/;
@@ -132,11 +171,6 @@ $(document).ready(function() {
                 $("#leader_email_error").addClass("alert alert-danger");
                 return false;
             }
-            else if (available == true){
-                $("#leader_email_error").html("Email already entered as member email.");
-                $("#leader_email_error").addClass("alert alert-danger");
-                return false;
-            }
             else{
                 $("#leader_email_error").html("");
                 $("#leader_email_error").removeClass("alert alert-danger");
@@ -167,7 +201,9 @@ $(document).ready(function() {
 
 
         if(teamname_validate && title_validate && description_validate &&
-            contactperson_validate && mobile_validate && email_validate ) {
+            contactperson_validate && mobile_validate && availabilty_validate && email_validate ) {
+
+            // alert('asdasdasdasdasdasd');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -192,12 +228,13 @@ $(document).ready(function() {
                         alert(response.message);
                         $('.form-group').children().val('');
                         $('.form-control').children().val('');
-                        $('.form-control').children().val('');
+                        $("#error").html("");
+                        $("#error").removeClass("alert alert-danger");
                         $('#success_message').show();
                         $('#success_message').fadeIn();
                         $('#success_message').html(response.message);
                         $('#success_message').fadeOut(6000);
-                        // window.location = "/";
+                        window.location = "/";
 
 
 
@@ -228,7 +265,7 @@ $(document).ready(function() {
 
         }
         else{
-            //alert('false');
+            alert('false');
             return false;
         }
 

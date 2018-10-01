@@ -1,9 +1,11 @@
 $(document).ready(function() {
     $('#add_members').hide();
     $('#member-list').hide();
+
     jsonObj = [];
     //Add Memebrs
     $('#add_members').click(function() {
+        var allmembers = $('#allmembers').val();
 
         var memberName = $('#member_name').val();
         var memberEmail = $('#member_email').val();
@@ -37,8 +39,17 @@ $(document).ready(function() {
         function memberEmailValidate() {
 
             var email = /^([a-zA-Z\d\-\.]+)@([a-zA-Z]{2,11})\.([a-zA-Z]{2,4})$/;
-
-            var contact_person_email = $('#email').val();
+                if(allmembers){
+                    var members = jQuery.parseJSON(allmembers);
+                    for (var i=0 ; i < members.length ; i++)
+                    {
+                        if (members[i].member_email == memberEmail) {
+                            var available = true;
+                        }
+                    }
+                }else{
+                    var available = false;
+                }
 
             if (memberEmail == "" ){
                 $("#member_email_error").html("Please Enter Email id.");
@@ -49,8 +60,8 @@ $(document).ready(function() {
                 $("#member_email_error").html("Please Enter valid email id.");
                 $("#member_email_error").addClass("alert alert-danger");
                 return false;
-            }else if (memberEmail == contact_person_email){
-                $("#member_email_error").html("You Cannot add this email as this email entered as leader email");
+            }else if (available == true){
+                $("#member_email_error").html("Email already exist.");
                 $("#member_email_error").addClass("alert alert-danger");
                 return false;
             }
@@ -104,13 +115,7 @@ $(document).ready(function() {
                         createJSON();
                         $('.member').children().val('');
                         $('.member').val('');
-
-                        // $('#member_name').val('');
-                        // $('#member_email').val('');
-                        // $('#member_mobile').val('');
-                        // $('#member_name_error').val('');
-                        // $('#member_email_error').val('');
-                        // $('#member_mobile_error').val('');
+                        $("#error").html("");
                         $('#success').val('');
                         $('#success').fadeIn();
                         $('#success').html('<div class="alert alert-success">'+response.message+'</div>');
@@ -130,10 +135,9 @@ $(document).ready(function() {
                     }
                     else{
                         $('#success').html('');
-                        $('#error').html('');
-                        $('#error').fadeIn();
-                        $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
-                        $('#error').fadeOut(6000);
+                        $('#member_email_error').html(response.message);
+                        $("#member_email_error").addClass("alert alert-danger");
+
                     }
                 }
 
