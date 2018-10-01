@@ -65,6 +65,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if(count($future_events) > 0)
                                 @foreach($future_events as $event)
                                 <tr class="inner-box">
                                     <th scope="row">
@@ -81,7 +82,7 @@
                                     </td>
                                     <td>
                                         <div class="event-wrap">
-                                            <h3><a href="speakers-single.html">{{$event['title']}}</a></h3>
+                                            <h3><a href="{{url('register',$event['id'])}}">{{$event['title']}}</a></h3>
                                             <div class="meta">
                                                 <div class="organizers">
                                                     <a href="#">{{$event['description']}}</a>
@@ -104,6 +105,13 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                    <tr class="inner-box">
+
+                                        <td colspan="5" class="text-center">No upcoming events available. </td>
+                                    </tr>
+
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -121,6 +129,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if(count($past_events)>0)
                                 @foreach($past_events as $event)
                                 <tr class="inner-box">
                                     <th scope="row">
@@ -137,7 +146,7 @@
                                     </td>
                                     <td>
                                         <div class="event-wrap">
-                                            <h3><a href="speakers-single.html">{{$event['title']}}</a></h3>
+                                            <h3><a href="{{url('participants',$event['id'])}}">{{$event['title']}}</a></h3>
                                             <div class="meta">
                                                 <div class="organizers">
                                                     <a href="#">{{$event['description']}}</a>
@@ -160,14 +169,16 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                        <tr class="inner-box">
 
+                                            <td colspan="5" class="text-center">No past events available. </td>
+                                        </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="primary-btn text-center">
-                    <a href="#" class="btn-primary">Download Schedule</a>
                 </div>
             </div>
             <!-- /col end-->
@@ -179,6 +190,7 @@
 <!--Event Schedule Area End Here-->
 
 
+{{--
 
 <!--Our Sponsers Area Start Here-->
 <div class="our-sponsers-area-tow pad100 bg-color">
@@ -264,6 +276,7 @@
     <!-- /container end-->
 </div>
 <!--Our Sponsers Area End Here-->
+--}}
 
 
 <!--Counter Up Area Start Here-->
@@ -274,7 +287,7 @@
                 <div class="single-counter xs-mb40">
                     <div class="count-content">
                         <span class="count">80</span>
-                        <p>Countries</p>
+                        <p>Events</p>
                     </div>
                 </div>
             </div>
@@ -283,7 +296,7 @@
                 <div class="single-counter xs-mb40">
                     <div class="count-content">
                         <span class="count">120</span>
-                        <p>Programs</p>
+                        <p>Participants</p>
                     </div>
                 </div>
             </div>
