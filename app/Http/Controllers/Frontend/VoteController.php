@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+//include(app_path().'/Services/nusoap.php');
+
 use App\Model\EventParticipant;
 use App\Model\EventParticipantsAsset;
 use App\Model\Vote;
@@ -9,6 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use session;
 use DB;
+use App\Services\nusoap_client;
+
+
 
 class VoteController extends Controller
 {
@@ -22,18 +27,40 @@ class VoteController extends Controller
         return view('frontend.vote',compact('event_participant'));
     }
 
-    public function post(Request $request){
+//    public function test(){
+//
+//        $client = new nusoap_client("http://services.neosofttech.in/webservices/send_otp_for_events.php");
+//        $error = $client->getError();
+//        if ($error) {
+//            echo "<h2>Constructor error</h2><pre>" . $error . "</pre>";
+//            exit;
+//        }
+//
+////sending request and receiving response4
+//        $arrEvent = $client->call("Authenticate_Login", array("parameter" => "authenticate", 'emailAddress' => 'akash.malik@wwindia.com', 'password' => 'neoworld2o16', 'otp' => 4325));
+//        dd(array($arrEvent,$client));
+//        exit;
+//
+//
+//    }
+
+    public function sendOtp(Request $request){
 
 
         if ($request->ajax()) {
 
             if(!$request->resend_flag){
                 if ($this->validate($request,
-                    ['email' => 'required|email'])) {
+                    ['email' => 'required|email' ])) {
 
                     $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->first();
 
                     //api call
+//                    $client = new nusoap_client("http://services.neosofttech.in/webservices/send_otp_for_events.php");
+//
+//                    $arrEvent = $client->call("Authenticate_Login", array("parameter" => "authenticate", 'emailAddress' => $request->email, 'password' => $request->password));
+
+
                     //echo "api called and we got otp as response";
                     if(!$vote){
                         $otp = '12345';
