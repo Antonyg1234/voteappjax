@@ -31,13 +31,16 @@
                         <div class="title-text mb50">
                             <h2>All Participants</h2>
                             <br><br>
+
                             @if ( session()->has('success') )
                                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                             @endif
-                            @if($event['vote_end_date'])
+                            @if(application_date_format($event['voting_end_date']) > date('yyyy-mm-dd'))
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
+                            @else
+                                <p>Last date for voting is {{application_date_format($event['voting_end_date'])}}</p>
                             @endif
                         </div>
                     </div>
