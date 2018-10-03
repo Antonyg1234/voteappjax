@@ -12,90 +12,9 @@ $(document).ready(function() {
         var memberMobile = $('#member_mobile').val();
         var eventId = $('#event_id').val();
 
-        // memberNameValidate();
-        // memberEmailValidate();
-        // memberMobileValidate();
-
-        function memberNameValidate()
-        {
-            var name = /^[A-Za-z ]+$/;
-            if (memberName == "" ){
-                $("#member_name_error").html("Please Enter Member Name.");
-                $("#member_name_error").addClass("alert alert-danger");
-                return false;
-            }
-            else if ( !memberName.match(name) ){
-                $("#member_name_error").html("Name should have characters.");
-                $("#member_name_error").addClass("alert alert-danger");
-                return false;
-            }
-            else{
-                $("#member_name_error").html("");
-                $("#member_name_error").removeClass("alert alert-danger");
-                return true;
-            }
-        }
-
-        function memberEmailValidate() {
-
-            var email = /^([a-zA-Z\d\-\.]+)@([a-zA-Z]{2,11})\.([a-zA-Z]{2,4})$/;
-                if(allmembers){
-                    var members = jQuery.parseJSON(allmembers);
-                    for (var i=0 ; i < members.length ; i++)
-                    {
-                        if (members[i].member_email == memberEmail) {
-                            var available = true;
-                        }
-                    }
-                }else{
-                    var available = false;
-                }
-
-            if (memberEmail == "" ){
-                $("#member_email_error").html("Please Enter Email id.");
-                $("#member_email_error").addClass("alert alert-danger");
-                return false;
-            }
-            else if (!memberEmail.match(email)){
-                $("#member_email_error").html("Please Enter valid email id.");
-                $("#member_email_error").addClass("alert alert-danger");
-                return false;
-            }else if (available == true){
-                $("#member_email_error").html("Email already exist.");
-                $("#member_email_error").addClass("alert alert-danger");
-                return false;
-            }
-            else{
-                $("#member_email_error").html("");
-                $("#member_email_error").removeClass("alert alert-danger");
-                return true;
-            }
-        }
-
-        function  memberMobileValidate() {
-            var number = /^[7-9]{1}[0-9]{9}$/;
-
-            if (memberMobile == "" ){
-                $("#member_mobile_error").html("Please Enter Phone number.");
-                $("#member_mobile_error").addClass("alert alert-danger");
-                return false;
-            }
-            else if (!memberMobile.match(number)){
-                $("#member_mobile_error").html("Please Enter 10 digits number.");
-                $("#member_mobile_error").addClass("alert alert-danger");
-                return false;
-            }
-            else{
-                $("#member_mobile_error").html("");
-                $("#member_mobile_error").removeClass("alert alert-danger");
-                return true;
-            }
-        }
-
-
-        var member_name_validate = memberNameValidate();
-        var member_email_validate = memberEmailValidate();
-        var member_mobile_vaidate = memberMobileValidate();
+        var member_name_validate = memberNameValidate(memberName);
+        var member_email_validate = memberEmailValidate(memberEmail,allmembers);
+        var member_mobile_vaidate = memberMobileValidate(memberMobile);
 
         if(member_name_validate && member_email_validate && member_mobile_vaidate){
             //controller call to validate email existence
@@ -153,6 +72,99 @@ $(document).ready(function() {
             jsonObj.push(item);
         }
     });
+
+
+    $("#member_name").blur(function () {
+        var memberName = $('#member_name').val();
+        memberNameValidate(memberName);
+    });
+
+    function memberNameValidate(memberName)
+    {
+        var name = /^[A-Za-z ]+$/;
+        if (memberName == "" ){
+            $("#member_name_error").html("Please Enter Member Name.");
+            $("#member_name_error").addClass("alert alert-danger");
+            return false;
+        }
+        else if ( !memberName.match(name) ){
+            $("#member_name_error").html("Name should have characters.");
+            $("#member_name_error").addClass("alert alert-danger");
+            return false;
+        }
+        else{
+            $("#member_name_error").html("");
+            $("#member_name_error").removeClass("alert alert-danger");
+            return true;
+        }
+    }
+
+    $("#member_email").blur(function () {
+        var memberEmail = $('#member_email').val();
+        var allmembers = $('#allmembers').val();
+        memberEmailValidate(memberEmail,allmembers);
+    });
+
+    function memberEmailValidate(memberEmail,allmembers) {
+
+        var email = /^([a-zA-Z\d\-\.]+)@([a-zA-Z]{2,11})\.([a-zA-Z]{2,4})$/;
+        if(allmembers){
+            var members = jQuery.parseJSON(allmembers);
+            for (var i=0 ; i < members.length ; i++)
+            {
+                if (members[i].member_email == memberEmail) {
+                    var available = true;
+                }
+            }
+        }else{
+            var available = false;
+        }
+
+        if (memberEmail == "" ){
+            $("#member_email_error").html("Please Enter Email id.");
+            $("#member_email_error").addClass("alert alert-danger");
+            return false;
+        }
+        else if (!memberEmail.match(email)){
+            $("#member_email_error").html("Please Enter valid email id.");
+            $("#member_email_error").addClass("alert alert-danger");
+            return false;
+        }else if (available == true){
+            $("#member_email_error").html("Email already exist.");
+            $("#member_email_error").addClass("alert alert-danger");
+            return false;
+        }
+        else{
+            $("#member_email_error").html("");
+            $("#member_email_error").removeClass("alert alert-danger");
+            return true;
+        }
+    }
+
+    $("#member_mobile").blur(function () {
+        var memberMobile = $('#member_mobile').val();
+        memberMobileValidate(memberMobile);
+    });
+
+    function  memberMobileValidate(memberMobile) {
+        var number = /^[7-9]{1}[0-9]{9}$/;
+
+        if (memberMobile == "" ){
+            $("#member_mobile_error").html("Please Enter Phone number.");
+            $("#member_mobile_error").addClass("alert alert-danger");
+            return false;
+        }
+        else if (!memberMobile.match(number)){
+            $("#member_mobile_error").html("Please Enter 10 digits number.");
+            $("#member_mobile_error").addClass("alert alert-danger");
+            return false;
+        }
+        else{
+            $("#member_mobile_error").html("");
+            $("#member_mobile_error").removeClass("alert alert-danger");
+            return true;
+        }
+    }
 
     //Remove Members
     $('#member-data').on('click','.btnX',function () {

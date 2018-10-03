@@ -11,7 +11,7 @@ $(document).ready(function() {
     $('#email_submit').click(function() {
         var resend_flag = '0';
         var email = $('#email').val();
-
+        var password = $('#password').val();
         $('#error').html('');
 
         $.ajaxSetup({
@@ -22,7 +22,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url:otpSenderUrl,
-            data : {email :email,event_p_id :event_p_id,event_id :event_id,resend_flag:resend_flag},
+            data : {email :email,event_p_id :event_p_id,event_id :event_id,resend_flag:resend_flag,password: password},
             dataType: 'json',
             success: function (response) {
 
@@ -52,6 +52,7 @@ $(document).ready(function() {
             },
             error: function (xhr) {
                 $('#error').html('');
+                // console.log(xhr.responseJSON.errors);
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
                     $('#error').append('<div class="alert alert-danger">'+value+'</div>');
@@ -89,7 +90,7 @@ $(document).ready(function() {
                 },
                 error:
                     function (xhr) {
-                        $.each(xhr.responseJSON.errors, function(key,value) {
+                        $(xhr.responseJSON.errors, function(key,value) {
                             $('#error').fadeIn();
                             $('#error').append('<div class="alert alert-danger">'+value+'</div>');
                             $('#error').fadeOut(5000);
