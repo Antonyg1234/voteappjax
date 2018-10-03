@@ -77,7 +77,7 @@
                         </div>
                         <div class="spk-info">
                             <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
-                            <p>Captain,{{$team['contact_person']}}</p>
+                            <p>Captain : {{$team['contact_person']}}</p>
                             @if(!$event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('vote',$team['id'])}}">Vote</a>

@@ -46,9 +46,7 @@ class VoteController extends Controller
 
     public function sendOtp(Request $request){
 
-
         if ($request->ajax()) {
-
             if(!$request->resend_flag){
                 if ($this->validate($request,
                     ['email' => 'required|email' ])) {

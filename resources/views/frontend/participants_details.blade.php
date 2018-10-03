@@ -48,7 +48,7 @@
                 <div class="col-lg-7 col-md-12">
                     <div class="inner-content">
                         <h1>{{$details['team_name']}}</h1>
-                        <span>{{$details['contact_person'].', '.implode(', ', array_column($details['members'],'name'))}}</span>
+                        <span>{{implode(', ', array_column($details['members'],'name'))}}</span>
                         <p>{{$details['title']}}</p>
                         <p class="mb-0">{{$details['description']}}</p>
                         {{--<div class="social-icon">--}}

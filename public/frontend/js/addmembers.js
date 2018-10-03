@@ -116,6 +116,7 @@ $(document).ready(function() {
                         $('.member').children().val('');
                         $('.member').val('');
                         $("#error").html("");
+                        $("#error").removeClass("alert alert-danger");
                         $('#success').val('');
                         $('#success').fadeIn();
                         $('#success').html('<div class="alert alert-success">'+response.message+'</div>');

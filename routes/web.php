@@ -21,7 +21,7 @@ Route::get('participants/result/{id}','Frontend\ParticipantController@result');
 
 //Vote Participants
 Route::get('vote/{id}','Frontend\VoteController@index');
-Route::post('vote/sendOtp','Frontend\VoteController@post');
+Route::post('vote/sendOtp','Frontend\VoteController@sendOtp');
 Route::post('vote/otp','Frontend\VoteController@otp');
 Route::get('vote/test','Frontend\VoteController@test');
 
