@@ -19,7 +19,7 @@ $(document).ready(function() {
         var contactperson_validate = contactPersonValidate(contactPerson);
         var mobile_validate = mobileValidate(mobile);
         var email_validate = emailValidate(leaderEmail,allmembers);
-        var availabilty_validate = contactPersonAvailabilty();
+        var availabilty_validate = memberAvailabilty();
 
         // var members = jQuery.parseJSON(allmembers);
         // alert(members.length);
@@ -29,41 +29,54 @@ $(document).ready(function() {
         // });
 
 
-        function contactPersonAvailabilty(){
-            var contact_person_email = $('#email').val();
-            // alert(contact_person_email);
+
+        function memberAvailabilty(){
             if(allmembers){
-                var members = jQuery.parseJSON(allmembers);
+                return true;
                 // alert(members.length);
-                for (var i=0 ; i < members.length ; i++)
-                {
-                    // alert(members[i].member_email);
-                    if (members[i].member_email == contact_person_email) {
-                        var check = true;
-                    }else {
-                        var check = false;
-                       continue;
-                    }
-                }
-                if(check == true){
-                    // alert('available');
-                    $("#error").html("");
-                    $("#error").removeClass("alert alert-danger");
-                    return true;
-                }else{
-                    // alert('not available');
-                    $("#error").html("Contact person not added as member.");
-                    $("#error").addClass("alert alert-danger");
-                    return false;
-                }
+
             }else{
-                // alert('PLease add');
+                        // alert('PLease add');
                 $("#error").html("Please add team members");
                 $("#error").addClass("alert alert-danger");
                 return false;
-
             }
         }
+        // function contactPersonAvailabilty(){
+        //     var contact_person_email = $('#email').val();
+        //     // alert(contact_person_email);
+        //     if(allmembers){
+        //         var members = jQuery.parseJSON(allmembers);
+        //         // alert(members.length);
+        //         for (var i=0 ; i < members.length ; i++)
+        //         {
+        //             // alert(members[i].member_email);
+        //             if (members[i].member_email == contact_person_email) {
+        //                 var check = true;
+        //             }else {
+        //                 var check = false;
+        //                continue;
+        //             }
+        //         }
+        //         if(check == true){
+        //             // alert('available');
+        //             $("#error").html("");
+        //             $("#error").removeClass("alert alert-danger");
+        //             return true;
+        //         }else{
+        //             // alert('not available');
+        //             $("#error").html("Contact person not added as member.");
+        //             $("#error").addClass("alert alert-danger");
+        //             return false;
+        //         }
+        //     }else{
+        //         // alert('PLease add');
+        //         $("#error").html("Please add team members");
+        //         $("#error").addClass("alert alert-danger");
+        //         return false;
+        //
+        //     }
+        // }
 
         if(teamname_validate && title_validate && description_validate &&
             contactperson_validate && mobile_validate && availabilty_validate && email_validate ) {
@@ -90,7 +103,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function (response) {
                     if(response.success == true){
-                        alert(response.message);
+                        // alert(response.message);
                         $('.form-group').children().val('');
                         $('.form-control').children().val('');
                         $("#error").html("");
@@ -128,7 +141,7 @@ $(document).ready(function() {
 
         }
         else{
-            alert('false');
+            // alert('false');
             return false;
         }
 
@@ -141,7 +154,7 @@ $(document).ready(function() {
 
     function teamNameValidate(teamName)
     {
-        var name = /^[A-Za-z0-1 ]+$/;
+        var name = /^[A-Za-z0-9 ]+$/;
 
         if (teamName == "" ){
             $("#team_name_error").html("Please Enter Team Name.");

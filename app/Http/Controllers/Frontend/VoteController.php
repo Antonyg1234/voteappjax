@@ -138,7 +138,8 @@ class VoteController extends Controller
 
                 session()->forget('otp');
                 session()->forget('user_email');
-
+                $request->session()->flash('success', 'You have been voted successfully for event.');
+                $request->session()->flash('message-type', 'success');
                 return response()->json(array(
                     'success' => true,
                     'event_id'=> $request->event_id,

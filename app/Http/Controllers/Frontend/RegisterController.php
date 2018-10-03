@@ -94,6 +94,8 @@ class RegisterController extends Controller
                                 $event_members->save();
                             }
                         }
+                        $request->session()->flash('success', 'You have been registered successfully for this event.');
+                        $request->session()->flash('message-type', 'success');
                         return response()->json(array(
                             'success' => true,
                             'message' => 'You have been registered successfully for this event.'

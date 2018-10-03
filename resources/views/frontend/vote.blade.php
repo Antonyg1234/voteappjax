@@ -39,11 +39,11 @@
                                         <input type="hidden" id="event_praticipants_id" name="event_praticipants_id" value="{{$event_participant['participants_id']}}">
                                         <input type="hidden" id="event_id" name="event_id" value="{{$event_participant['event_id']}}">
                                         <div class="form-group">
-                                            <input id="email" type="text" name="email" class="form-control" placeholder="Enter Email" >
+                                            <input id="email" type="text" name="email" class="form-control" placeholder="Enter Email*" >
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-group">
-                                            <input id="password" type="password" name="password" class="form-control" placeholder="Enter password" >
+                                            <input id="password" type="password" name="password" class="form-control" placeholder="Enter password*" >
                                             <div class="help-block with-errors"></div>
                                         </div>
 
@@ -57,7 +57,7 @@
                                         {{--<div id="success"></div>--}}
                                         <sapn>Please enter OTP below :</sapn>
                                         <div class="form-group">
-                                            <input id="otp" type="text" name="otp" class="form-control" placeholder="Enter OTP" >
+                                            <input id="otp" type="text" name="otp" class="form-control" placeholder="Enter OTP*" >
                                             <div class="help-block with-errors"></div>
                                         </div>
 

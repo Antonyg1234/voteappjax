@@ -12,9 +12,9 @@ $(document).ready(function() {
         var memberMobile = $('#member_mobile').val();
         var eventId = $('#event_id').val();
 
-        memberNameValidate();
-        memberEmailValidate();
-        memberMobileValidate();
+        // memberNameValidate();
+        // memberEmailValidate();
+        // memberMobileValidate();
 
         function memberNameValidate()
         {
@@ -129,7 +129,7 @@ $(document).ready(function() {
                             '<td>'+memberName+'</td>' +
                             '<td>'+memberEmail+'</td>' +
                             '<td>'+memberMobile+'</td>' +
-                            '<td class="btnX"><input id="'+memberEmail+'" class="removebtn" type="button" name="x" value="x"></td>'+
+                            '<td class="btnX"><a id="'+memberEmail+'" class="removebtn"><span class="fa fa-trash"></span></a></td>'+
                             '</tr>');
                         addmemberstoinput();
 

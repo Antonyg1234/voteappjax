@@ -37,14 +37,14 @@ $(document).ready(function() {
                     $('#success').html('');
                     $('#error').fadeIn();
                     $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
-                    $('#error').fadeOut(3000);
+                    $('#error').fadeOut(5000);
 
                 }
                 else{
                     $('#success').html('');
                     $('#success').fadeIn();
                     $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
-                    $('#success').fadeOut(3000);
+                    $('#success').fadeOut(5000);
                     $('#otp-form').show();
                     $('#contact-form').hide();
                 }
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
                     $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                    $('#error').fadeOut(1000);
+                    $('#error').fadeOut(5000);
 
                 });
             },
@@ -92,7 +92,7 @@ $(document).ready(function() {
                         $.each(xhr.responseJSON.errors, function(key,value) {
                             $('#error').fadeIn();
                             $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                            $('#error').fadeOut(50000);
+                            $('#error').fadeOut(5000);
 
                         });
 
@@ -119,7 +119,7 @@ $(document).ready(function() {
                     $('#success').html('');
                     $('#success').fadeIn();
                     $('#success').html('<div class="alert alert-success">'+response.message+'</div>');
-                    $('#success').fadeOut(3000);
+                    $('#success').fadeOut(5000);
 
                 }
                 $('#error').html('');
@@ -130,17 +130,17 @@ $(document).ready(function() {
                     $('#success').html('');
                     $('#error').fadeIn();
                     $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
-                    $('#error').fadeOut(3000);
+                    $('#error').fadeOut(5000);
 
                 }
 
             },
             error: function (xhr) {
-                alert('resend error');
+                // alert('resend error');
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
                     $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                    $('#error').fadeOut(3000);
+                    $('#error').fadeOut(5000);
 
                 });
 
