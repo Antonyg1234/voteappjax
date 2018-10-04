@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-//include(app_path().'/Services/nusoap.php');
-
 use App\Model\EventParticipant;
 use App\Model\EventParticipantsAsset;
 use App\Model\Vote;
@@ -11,62 +9,27 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use session;
 use DB;
-use App\Services\nusoap_client;
-
-
 
 class VoteController extends Controller
 {
     public function index(Request $request){
-
         $event_participant = EventParticipant::from('event_participants as ep')
             ->join('event_masters as em','em.id','=','ep.event_id')
             ->select('ep.id as participants_id','em.id as event_id','em.title as event_title','em.description as description','ep.team_name')
             ->where('ep.id','=',$request->id)->first();
-        //dd($event_participant->toArray());
         return view('frontend.vote',compact('event_participant'));
     }
 
-//    public function test(){
-//
-//        $client = new nusoap_client("http://services.neosofttech.in/webservices/send_otp_for_events.php");
-//        $error = $client->getError();
-//        if ($error) {
-//            echo "<h2>Constructor error</h2><pre>" . $error . "</pre>";
-//            exit;
-//        }
-//
-////sending request and receiving response4
-//        $arrEvent = $client->call("Authenticate_Login", array("parameter" => "authenticate", 'emailAddress' => 'akash.malik@wwindia.com', 'password' => 'neoworld2o16', 'otp' => 4325));
-//        dd(array($arrEvent,$client));
-//        exit;
-//
-//
-//    }
-
     public function sendOtp(Request $request){
-
         if ($request->ajax()) {
             if(!$request->resend_flag){
                 if ($this->validate($request,
                     ['email' => 'required|email','password'=> 'required' ])) {
-
                     $vote = Vote::select('vote')->where('event_id',$request->event_id)->where('email',$request->email)->first();
-                    //api call
-
+                    session(['password'=>$request->password]);
                     if(!$vote){
-
                         $otp = mt_rand(1000, 9999);
-//                        $response = $this->neovalidate($request->email,$request->password,$otp);
-
-                        $url = 'http://services.neosofttech.in/events/sendotp.php';
-                        $ch = curl_init( $url );
-                        $payload = json_encode( array( "email"=> $request->email,"password"=> $request->password,"otp"=> $otp) );
-                        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-                        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-                        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-                        $result = curl_exec($ch);
-                        curl_close($ch);
+                        $result = $this->neovalidate($request->email,$request->password,$otp);
                         $result = json_decode($result,true);
                         if($result['is_valid']){
                             if($otp != ''){
@@ -76,10 +39,8 @@ class VoteController extends Controller
                                 $voterDeatails['event_p_id'] = $request->event_p_id;
                                 $voterDeatails['otp'] = $otp;
                                 Vote::create($voterDeatails);
-                                session(['otp'=>$otp]);
+                                session(['otp'=> 1]);
                                 session(['user_email'=>$request->email]);
-
-
                                 return response()->json(array(
                                     'success' => true,
                                     'message'=> $result['message']
@@ -88,39 +49,38 @@ class VoteController extends Controller
                                 return response()->json(array(
                                     'success' => false,
                                     'message' => 'OTP could not be sent.'
-
                                 ));
                             }
-
                         }else{
                             return response()->json(array(
                                 'success' => false,
                                 'message' => $result['message']
-
                             ));
                         }
                     }else{
                         return response()->json(array(
                             'success' => false,
                             'voted' => 'Sorry, You have voted already.'
-
                         ));
                     }
                 }else{
                     return response()->json(array(
                         'success' => false,
                         'errors' => $this->validate->getMessageBag()->toArray()
-
                     ));
                 }
             }else{
-                //api call
-                //echo "api called and we got otp as response";
-                    $otp = '546899';
+                $otp = mt_rand(1000, 9999);
+                $email= session()->get('user_email');
+                $password = session()->get('password');
+                $result = $this->neovalidate($email,$password,$otp);
+                $result = json_decode($result,true);
+                if($result['is_valid']){
                     if($otp != ''){
                         Vote::where('event_id', '=', $request->event_id)
                             ->where('event_p_id','=',$request->event_p_id)
                             ->update(array('otp' => $otp));
+                        session(['otp'=>1]);
 
                         return response()->json(array(
                             'success' => true,
@@ -133,7 +93,12 @@ class VoteController extends Controller
 
                         ));
                     }
-
+                }else{
+                    return response()->json(array(
+                        'success' => false,
+                        'message' => $result['message']
+                    ));
+                }
             }
         }
     }
@@ -144,51 +109,46 @@ class VoteController extends Controller
             if($this->validate($request,[
                 'otp' => 'required|numeric|digits:4',
             ])){
-                //api call for matched otp
                 $email = session()->get('user_email');
-
-                Vote::where('email', '=', $email)->update(array('vote' => '1','otp' => NULL));
-
-                DB::table('event_participants')->where('id' , $request->event_p_id)->where('event_id' , $request->event_id)->increment('vote_count', 1);
-
-                session()->forget('otp');
-                session()->forget('user_email');
-                $request->session()->flash('success', 'You have been voted successfully for event.');
-                $request->session()->flash('message-type', 'success');
-                return response()->json(array(
-                    'success' => true,
-                    'event_id'=> $request->event_id,
-                    'message'=>'You have voted successfully'                ));
+                $otp = Vote::select('otp')->where('email', '=', $email)->where('event_id' , $request->event_id)->first();
+                if($otp->otp == $request->otp){
+                    Vote::where('email', '=', $email)->update(array('vote' => '1','otp' => NULL));
+                    DB::table('event_participants')->where('id' , $request->event_p_id)->where('event_id' , $request->event_id)->increment('vote_count', 1);
+                    session()->forget('otp');
+                    session()->forget('user_email');
+                    $request->session()->flash('success', 'You have been voted successfully for event.');
+                    $request->session()->flash('message-type', 'success');
+                    return response()->json(array(
+                        'success' => true,
+                        'event_id'=> $request->event_id,
+                        'message'=>'You have voted successfully'
+                    ));
+                }
+                else{
+                    return response()->json(array(
+                        'success' => false,
+                        'wrong_otp'=>'Entered wrong OTP.'
+                    ));
+                }
             }
             else{
                 return response()->json(array(
                     'success' => false,
                     'errors' => $this->validate->getMessageBag()->toArray()
-
                 ));
             }
         }
-
-//        session()->forget('otp');
-//
-//        return back()->with('success','you have voted successfully');
     }
 
     public function neovalidate($email,$password,$otp){
-
-        print_r($email,$password);
         $url = 'http://services.neosofttech.in/events/sendotp.php';
         $ch = curl_init( $url );
-        $payload = json_encode( array( "email"=> $email,"password"=> $password,"otp"=> $otp) );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        $payload = array( "email"=> $email,"password"=> $password,"otp"=> $otp);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query($payload));
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         $result = curl_exec($ch);
         curl_close($ch);
         return $result;
     }
-
-
-
-
 }

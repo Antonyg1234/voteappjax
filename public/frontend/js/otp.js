@@ -2,8 +2,7 @@ $(document).ready(function() {
     var event_p_id = $('#event_praticipants_id').val();
     var event_id = $('#event_id').val();
     var otp_sent = $('#otp_div').val();
-
-
+    
     if(otp_sent){
         $('#contact-form').hide();
         $('#otp-form').show();
@@ -25,7 +24,6 @@ $(document).ready(function() {
             data : {email :email,event_p_id :event_p_id,event_id :event_id,resend_flag:resend_flag,password: password},
             dataType: 'json',
             success: function (response) {
-
                 if(response.success == false && response.voted){
                     $('#success').html('');
                     $('#error').fadeIn();
@@ -39,6 +37,11 @@ $(document).ready(function() {
                     $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
                     $('#error').fadeOut(5000);
 
+                }else if (response.success == false && response.wrong_otp){
+                    $('#success').html('');
+                    $('#error').fadeIn();
+                    $('#error').html('<div class="alert alert-danger">'+response.wrong_otp+'</div>');
+                    $('#error').fadeOut(5000);
                 }
                 else{
                     $('#success').html('');
@@ -52,16 +55,15 @@ $(document).ready(function() {
             },
             error: function (xhr) {
                 $('#error').html('');
-                // console.log(xhr.responseJSON.errors);
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
                     $('#error').append('<div class="alert alert-danger">'+value+'</div>');
                     $('#error').fadeOut(5000);
-
+                    exit;
                 });
-            },
+            }
         });
-    })
+    });
 
         $('#otp_submit').click(function() {
             $('#error').val('');
@@ -77,24 +79,30 @@ $(document).ready(function() {
                 data : {otp:otp,event_p_id :event_p_id,event_id :event_id},
                 dataType: 'json',
                 success: function (response) {
-                    $('#otp,#email').val('');
-                    $('#success').html('');
-                    $('#success').fadeIn();
-                    $('#success').append('<div class="alert alert-success">'+response.message+'</div>');
-                    $('#success').fadeOut(10000);
-                    $('#error').html('');
-                    $('#otp-form').hide();
-                    $('#contact-form').show();
-                    location.href = "/participants/"+event_id;
 
+                    if(response.success == true){
+                        $('#otp,#email').val('');
+                        $('#success').html('');
+                        $('#success').fadeIn();
+                        $('#success').html('<div class="alert alert-success">'+response.message+'</div>');
+                        $('#success').fadeOut(10000);
+                        $('#error').html('');
+                        $('#otp-form').hide();
+                        $('#contact-form').show();
+                        location.href = "/participants/"+event_id;
+                    }else{
+                        $('#success').html('');
+                        $('#error').fadeIn();
+                        $('#error').html('<div class="alert alert-danger">'+response.wrong_otp+'</div>');
+                        $('#error').fadeOut(5000);
+                    }
                 },
                 error:
                     function (xhr) {
-                        $(xhr.responseJSON.errors, function(key,value) {
+                        $.each(xhr.responseJSON.errors, function(key,value) {
                             $('#error').fadeIn();
                             $('#error').append('<div class="alert alert-danger">'+value+'</div>');
                             $('#error').fadeOut(5000);
-
                         });
 
                     }
@@ -132,17 +140,14 @@ $(document).ready(function() {
                     $('#error').fadeIn();
                     $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
                     $('#error').fadeOut(5000);
-
                 }
 
             },
             error: function (xhr) {
-                // alert('resend error');
                 $.each(xhr.responseJSON.errors, function(key,value) {
                     $('#error').fadeIn();
-                    $('#error').append('<div class="alert alert-danger">'+value+'</div>');
+                    $('#error').html('<div class="alert alert-danger">'+value+'</div>');
                     $('#error').fadeOut(5000);
-
                 });
 
             }
