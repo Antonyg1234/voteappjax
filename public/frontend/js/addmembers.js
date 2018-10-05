@@ -26,7 +26,7 @@ $(document).ready(function() {
             });
             $.ajax({
                 type: "POST",
-                url: '/register/checkemail',
+                url: checkemail,
                 data: {memberEmail: memberEmail,eventId: eventId},
                 dataType: 'json',
                 success: function (response) {

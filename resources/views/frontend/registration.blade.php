@@ -150,6 +150,7 @@
 @section('script')
     <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
     <script>CKEDITOR.replace('description');</script>
+    <script> var checkemail = "{{url('/register/checkemail')}}"; </script>
     <script src="{{asset('frontend/js/registration.js')}}"></script>
     <script src="{{asset('frontend/js/addmembers.js')}}"></script>
 
