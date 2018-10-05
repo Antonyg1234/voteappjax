@@ -220,10 +220,7 @@ class ParticipantController extends Controller
                 'images' => 'required',
             ])) {
 
-//                EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->delete();
-//
-//                echo "<pre>";
-//                print_r(DB::getQueryLog());die();
+                EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->delete();
                 $images = Input::file('images');
                 $destinationPath = public_path().'/uploads/';
                 $assets = EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->get();
@@ -231,9 +228,6 @@ class ParticipantController extends Controller
 
                 if($totalAssets <= 4){
                     foreach ($images as $image){
-//                    echo '<pre>';
-//                    print_r($image);
-//                    die($images);
                         $filename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                         $unique_image_name = $filename . '_' . $current_time . '.' . $image->getClientOriginalExtension();
                         $image->move($destinationPath, $unique_image_name);
@@ -253,7 +247,7 @@ class ParticipantController extends Controller
             if ($this->validate($request, [
                 'video' => 'required',
             ])) {
-//                EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->delete();
+                EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->delete();
                 $EventParticipantsAsset = new EventParticipantsAsset();
                 $EventParticipantsAsset->event_p_id = $members['event_p_id'];
                 $EventParticipantsAsset->asset_type =  $request->asset_type;
