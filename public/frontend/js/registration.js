@@ -8,7 +8,7 @@ $(document).ready(function() {
         var title = $("#title").val();
         // var description = $("#description").text();
         var description =  CKEDITOR.instances['description'].getData();
-        alert(description);
+        // alert(description);
         var contactPerson = $("#contact_person").val();
         var leaderEmail = $("#email").val();
         var mobile = $("#mobile").val();
@@ -91,7 +91,7 @@ $(document).ready(function() {
             });
             $.ajax({
                 type: "POST",
-                url: '/register',
+                url: register,
                 data: {
                     team_name: teamName,
                     title: title,
@@ -121,7 +121,7 @@ $(document).ready(function() {
                         $('#failed_message').fadeIn();
                         $('#failed_message').html(response.message);
                         $('#failed_message').fadeOut(6000);
-                        alert(response.message);
+                        // alert(response.message);
                     }
 
                 }
