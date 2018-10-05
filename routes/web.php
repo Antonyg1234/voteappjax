@@ -18,8 +18,12 @@ Route::get('/', 'Frontend\HomeController@index');
 Route::get('participants/{id}', 'Frontend\ParticipantController@index');
 Route::get('participants/details/{id}','Frontend\ParticipantController@details');
 Route::get('participants/result/{id}','Frontend\ParticipantController@result');
+
 Route::get('participants/upload/{id}','Frontend\ParticipantController@verificationForUploadAssets');
 Route::post('participants/sendOtpforupload','Frontend\ParticipantController@sendOtpForUpload');
+Route::post('participants/verify','Frontend\ParticipantController@otpVerification');
+Route::get('participants/uploadform/{id}/{event_p_id}','Frontend\ParticipantController@uploadAssetsForm');
+Route::post('participants/uploadassets','Frontend\ParticipantController@uploadAssets');
 
 //Vote Participants
 Route::get('vote/{id}','Frontend\VoteController@index');

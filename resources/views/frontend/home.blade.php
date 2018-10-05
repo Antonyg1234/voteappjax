@@ -10,7 +10,7 @@
                 <div class="banner-content">
                     <div class="upcoming">
                         <span class="is-countdown"> </span>
-                        <div data-countdown="{{$upcoming_event_time}}"></div>
+                        <div data-countdown="2018/10/2"></div>
                     </div>
                     <h3>Neosoft Ganesh</h3>
                 </div>
@@ -165,6 +165,8 @@
                                     <td>
                                         <div class="primary-btn">
                                             <a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>
+                                            <br/><br/>
+                                            <a class="btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload</a>
                                         </div>
                                     </td>
                                 </tr>

@@ -62,12 +62,13 @@
                                         <p id="team_name_error"></p>
                                     </div>
                                     <div class="form-group">
-                                        <input id="title" type="text" name="title" value="{!! old('title') !!}" class="{{ $errors->has('title') ? 'alert alert-danger' : ''}} form-control" placeholder="Title*" >
+                                        <input id="title" type="text" name="title" value="{!! old('title') !!}" class="{{ $errors->has('title') ? 'alert alert-danger' : ''}} form-control" placeholder="Activity Title*" >
                                         {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                                         <p id="title_error"></p>
                                     </div>
                                     <div class="form-group">
-                                        <textarea id="description" name="description"  class="{{ $errors->has('description') ? 'alert alert-danger' : ''}} form-control" placeholder="Description*" rows="5">{!! old('description') !!}</textarea>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity Description*</span>
+                                        <textarea id="description" name="description"  class="{{ $errors->has('description') ? 'alert alert-danger' : ''}} form-control" placeholder="Activity Description*" rows="5">{!! old('description') !!}</textarea>
                                         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                                         <p id="description_error"></p>
                                     </div>
@@ -89,6 +90,9 @@
                                     <input type="hidden" name="allmembers" id="allmembers" value="">
 
                                     <div id="members">
+                                        <div class="form-group">
+                                            <h5 class="text-center">Add Members</h5>
+                                        </div>
                                         <div id="success"></div>
                                         <div id="error"></div>
                                         <div class="form-group">
@@ -145,9 +149,9 @@
 @endsection
 
 @section('script')
-
+    <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
+    <script>CKEDITOR.replace('description');</script>
     <script src="{{asset('frontend/js/registration.js')}}"></script>
-
     <script src="{{asset('frontend/js/addmembers.js')}}"></script>
 
 

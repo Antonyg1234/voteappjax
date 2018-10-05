@@ -20,18 +20,11 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "POST",
-            url:otpSenderUrl,
+            url:uploadOtpSenderUrl,
             data : {email :email,event_p_id :event_p_id,event_id :event_id,resend_flag:resend_flag,password: password},
             dataType: 'json',
             success: function (response) {
-                if(response.success == false && response.voted){
-                    $('#success').html('');
-                    $('#error').fadeIn();
-                    $('#error').html('<div class="alert alert-danger">'+response.voted+'</div>');
-                    $('#error').fadeOut(3000);
-
-                }
-                else if(response.success == false && response.message){
+                if(response.success == false && response.message){
                     $('#success').html('');
                     $('#error').fadeIn();
                     $('#error').html('<div class="alert alert-danger">'+response.message+'</div>');
@@ -65,50 +58,48 @@ $(document).ready(function() {
         });
     });
 
-        $('#otp_submit').click(function() {
-            $('#error').val('');
-            var otp = $('#otp').val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url:voteUrl,
-                data : {otp:otp,event_p_id :event_p_id,event_id :event_id},
-                dataType: 'json',
-                success: function (response) {
-
-                    if(response.success == true){
-                        $('#otp,#email').val('');
-                        $('#success').html('');
-                        $('#success').fadeIn();
-                        $('#success').html('<div class="alert alert-success">'+response.message+'</div>');
-                        $('#success').fadeOut(10000);
-                        $('#error').html('');
-                        $('#otp-form').hide();
-                        $('#contact-form').show();
-                        location.href = "/participants/"+event_id;
-                    }else{
-                        $('#success').html('');
-                        $('#error').fadeIn();
-                        $('#error').html('<div class="alert alert-danger">'+response.wrong_otp+'</div>');
-                        $('#error').fadeOut(5000);
-                    }
-                },
-                error:
-                    function (xhr) {
-                        $.each(xhr.responseJSON.errors, function(key,value) {
-                            $('#error').fadeIn();
-                            $('#error').append('<div class="alert alert-danger">'+value+'</div>');
-                            $('#error').fadeOut(5000);
-                        });
-
-                    }
-
-            });
+    $('#otp_submit').click(function() {
+        $('#error').val('');
+        var otp = $('#otp').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
+        $.ajax({
+            type: "POST",
+            url:otpverficationUrl,
+            data : {otp:otp,event_id :event_id},
+            dataType: 'json',
+            success: function (response) {
+
+                console.log(response);
+                if(response.success == true){
+                    $('#otp,#email').val('');
+                    $('#success').html('');
+                    $('#error').html('');
+                    $('#otp-form').hide();
+                    $('#contact-form').show();
+                    location.href = "/participants/uploadform/"+event_id+"/"+response.event_p_id;
+                }else{
+                    $('#success').html('');
+                    $('#error').fadeIn();
+                    $('#error').html('<div class="alert alert-danger">'+response.wrong_otp+'</div>');
+                    $('#error').fadeOut(5000);
+                }
+            },
+            error:
+                function (xhr) {
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#error').fadeIn();
+                        $('#error').append('<div class="alert alert-danger">'+value+'</div>');
+                        $('#error').fadeOut(5000);
+                    });
+
+                }
+
+        });
+    });
     $('#otp_resend').click(function() {
 
         var resend_flag = 1;

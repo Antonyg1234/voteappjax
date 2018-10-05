@@ -6,7 +6,9 @@ $(document).ready(function() {
         // alert('asdasd');
         var teamName = $("#team_name").val();
         var title = $("#title").val();
-        var description = $("#description").val();
+        // var description = $("#description").text();
+        var description =  CKEDITOR.instances['description'].getData();
+        alert(description);
         var contactPerson = $("#contact_person").val();
         var leaderEmail = $("#email").val();
         var mobile = $("#mobile").val();
@@ -31,7 +33,8 @@ $(document).ready(function() {
 
 
         function memberAvailabilty(){
-            if(allmembers){
+            var members = jQuery.parseJSON(allmembers)
+            if(members.length){
                 return true;
                 // alert(members.length);
 
@@ -81,7 +84,6 @@ $(document).ready(function() {
         if(teamname_validate && title_validate && description_validate &&
             contactperson_validate && mobile_validate && availabilty_validate && email_validate ) {
 
-            // alert('asdasdasdasdasdasd');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -114,20 +116,6 @@ $(document).ready(function() {
                         $('#success_message').fadeOut(6000);
                         window.location = "/";
 
-
-
-                        // setTimeout(function() {
-                        //     $('#success_message').fadeOut('fast');
-                        // }, 30000);
-                        // $('#team_name_error').val('');
-
-                        // $('#team_name_error').val('');
-                        // $('#title_error').val('');
-                        // $('#contact_person_name_error').val('');
-                        // $('#leader_email_error').val('');
-                        // $('#mobile_error').val('');
-                        // $('#description_error').val('');
-
                     }else{
                         $('#failed_message').show();
                         $('#failed_message').fadeIn();
@@ -147,7 +135,7 @@ $(document).ready(function() {
 
     });
 
-    var teamname_validate = $("#team_name").blur(function () {
+    $("#team_name").blur(function () {
         var teamName = $("#team_name").val();
         teamNameValidate(teamName);
     });
@@ -173,13 +161,13 @@ $(document).ready(function() {
         }
     }
 
-    var title_validate = $("#title").blur(function () {
+    $("#title").blur(function () {
         var title = $("#title").val();
         titleValidate(title);
     });
 
     function titleValidate(title) {
-        var name = /^[A-Za-z]+$/;
+        var name = /^[A-Za-z0-9 ]+$/;
 
         if (title == "" ){
             $("#title_error").html("Please Enter title.");
@@ -199,8 +187,8 @@ $(document).ready(function() {
         }
     }
 
-    var description_validate = $("#description").blur(function () {
-        var description = $("#description").val();
+    $("#description").blur(function () {
+        var description =  CKEDITOR.instances['description'].getData();
         descriptionValidate(description);
     });
     function  descriptionValidate(description)
@@ -217,7 +205,7 @@ $(document).ready(function() {
         }
     }
 
-    var contactperson_validate = $("#contact_person").blur(function () {
+    $("#contact_person").blur(function () {
         var contactPerson = $("#contact_person").val();
         contactPersonValidate(contactPerson);
     });
@@ -244,7 +232,7 @@ $(document).ready(function() {
         }
     }
 
-    var email_validate = $("#email").blur(function () {
+    $("#email").blur(function () {
         var leaderEmail = $("#email").val();
         var allmembers = $('#allmembers').val();
         emailValidate(leaderEmail,allmembers);
@@ -281,7 +269,7 @@ $(document).ready(function() {
         }
     }
 
-    var mobile_validate = $("#mobile").blur(function () {
+    $("#mobile").blur(function () {
         var mobile = $("#mobile").val();
         mobileValidate(mobile);
     });
