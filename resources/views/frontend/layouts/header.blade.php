@@ -14,11 +14,11 @@
                         <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <a class="nav-link" href="{{url('/')}}">Home</a>
-                        </ul>
-                    </div>
+                    {{--<div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+                        {{--<ul class="navbar-nav ml-auto">--}}
+                            {{--<a class="nav-link" href="{{url('/')}}">Home</a>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
                 </nav>
             </div>
             <!-- /col end-->

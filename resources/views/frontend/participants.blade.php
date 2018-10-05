@@ -10,7 +10,6 @@
                     <div class="about-content">
                         <div class="section-title text-center">
                             <h2>{{$event['title']}}</h2>
-                            <p>{{$event['description']}}</p>
                         </div>
                     </div>
                 </div>
