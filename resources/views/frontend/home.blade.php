@@ -85,7 +85,7 @@
                                             <h3><a href="{{url('register',$event['id'])}}">{{$event['title']}}</a></h3>
                                             <div class="meta">
                                                 <div class="organizers">
-                                                    <a href="#">{{$event['description']}}</a>
+                                                    <a href="{{url('register',$event['id'])}}">{{$event['description']}}</a>
                                                 </div>
                                                 <div class="time">
                                                     <span>{{$event['event_date'][3]." ".$event['event_date'][4]}}</span>
@@ -131,7 +131,7 @@
                                 <tbody>
                                 @if(count($past_events)>0)
                                 @foreach($past_events as $event)
-                                <tr class="inner-box">
+                                <tr onclick="document.location = '{{url('participants',$event['id'])}}';" class="inner-box">
                                     <th scope="row">
                                         <div class="event-date">
                                             <span>{{$event['event_date'][0]}}</span>
@@ -149,7 +149,7 @@
                                             <h3><a href="{{url('participants',$event['id'])}}">{{$event['title']}}</a></h3>
                                             <div class="meta">
                                                 <div class="organizers">
-                                                    <a href="#">{{$event['description']}}</a>
+                                                    <a href="{{url('participants',$event['id'])}}">{{$event['description']}}</a>
                                                 </div>
                                                 <div class="time">
                                                     <span>{{$event['event_date'][3]." ".$event['event_date'][4]}}</span>
@@ -164,12 +164,13 @@
                                     </td>
                                     <td>
                                         <div class="primary-btn">
-                                            <a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>
-                                            <br/><br/>
-                                            <a class="btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload</a>
+                                            {{--<a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>--}}
+                                            {{--<br/><br/>--}}
+                                            <a class="btn btn-sm btn-primary" href="{{url('participants/upload',$event['id'])}}">Content Upload</a>
                                         </div>
                                     </td>
                                 </tr>
+
                                 @endforeach
                                 @else
                                         <tr class="inner-box">

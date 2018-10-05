@@ -23,6 +23,9 @@
     <!--Speakers Single Area Start Here-->
     <div class="speakers-single-area pad100">
         <div class="container">
+            @if ( session()->has('success') )
+                <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
+            @endif
             <div class="row">
                 <div class="col-lg-5 col-md-12">
                     <div class="speakers-img">
@@ -30,11 +33,11 @@
                             @if($asset['asset_type'] == 'image')
                                 @if($index ==0)
                                     <a href="{{$asset['assets']}}" data-lightbox="display">
-                                        <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
+                                        <img class="img-fluid" src="{{$asset['assets']}}" width="375" alt="trainer-img">
                                     </a>
                                 @else
                                     <a href="{{$asset['assets']}}" data-lightbox="display" style="display:none">
-                                        <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
+                                        <img class="img-fluid" src="{{$asset['assets']}}" width="375" alt="trainer-img">
                                     </a>
                                 @endif
                             @else

@@ -9,6 +9,7 @@ use App\Model\EventParticipantsMember;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use PhpParser\Node\Stmt\Return_;
 
 class ParticipantController extends Controller
@@ -30,7 +31,7 @@ class ParticipantController extends Controller
 
     public function details(Request $request){
         $participant_details = EventParticipant::where('id','=',$request->id)->first();
-
+//dd($request->id);
         $details = $participant_details->toArray();
 
         $assets = EventParticipantsAsset::where('event_p_id','=',$request->id)->get();
@@ -38,7 +39,7 @@ class ParticipantController extends Controller
         //dd($details);
         $member = EventParticipantsMember::select('name')->where('event_id',$details['event_id'])->where('event_p_id',$request->id)->get();
         $details['members'] = $member->toArray();
-    //dd($details);
+//    dd($details['event_id']);
         $event = EventMaster::where('id','=',$details['event_id'])->first();
 
         return view('frontend.participants_details',compact('details','event'));
@@ -113,7 +114,7 @@ class ParticipantController extends Controller
                     else{
                         return response()->json(array(
                             'success' => false,
-                            'message' => 'Sorry,You cannot upload asset'
+                            'message' => 'Sorry, You have not register for this event'
                         ));
 
                     }
@@ -125,7 +126,24 @@ class ParticipantController extends Controller
                 }
             }else{
 
-                //resend ka code
+                $otp = mt_rand(1000, 9999);
+                $email= session()->get('user_email');
+                $password = session()->get('password');
+                $result = $this->neovalidate($email,$password,$otp);
+                $result = json_decode($result,true);
+                if($result['is_valid']){
+                    session(['otp'=>1]);
+                    session(['otpcode'=>$otp]);
+                        return response()->json(array(
+                            'success' => true,
+                            'message'=>'OTP resent to your mobile. Please enter sent otp below.'
+                        ));
+                }else{
+                    return response()->json(array(
+                        'success' => false,
+                        'message' => $result['message']
+                    ));
+                }
             }
         }
     }
@@ -144,7 +162,6 @@ class ParticipantController extends Controller
                     ->where('event_id',$request->event_id)->where('email',$email)->first();
                 if($otpcode == $request->otp){
                     session()->forget('otp');
-                    session()->forget('user_email');
                     session(['event_p_id'=> $members['event_p_id']]);
 
                     return response()->json(array(
@@ -190,18 +207,56 @@ class ParticipantController extends Controller
     }
 
     public function uploadAssets(Request $request){
+//        die('in upload contro');
 
-        die('in upload contro');
-        if($this->validate($request,[
-            'images' => 'mimes:jpeg,png,jpg|required|image',
-        ])){
+//
+        $members =  EventParticipantsMember::select('email','event_p_id','event_id')
+            ->where('event_id',$request->event_id)->where('email',$request->event_p_email)->first();
+        $current_time = time();
 
+        if($request->asset_type == "image"){
 
+            if($this->validate($request,[
+                'images' => 'required',
+            ])) {
 
+                $images = Input::file('images');
+                $destinationPath = public_path().'/uploads/';
+                $assets = EventParticipantsAsset::where('event_p_id',$members['event_p_id'])->get();
+                $totalAssets = sizeof($assets->toArray());
+
+                if($totalAssets <= 4){
+                    foreach ($images as $image){
+//                    echo '<pre>';
+//                    print_r($image);
+//                    die($images);
+                        $filename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        $unique_image_name = $filename . '_' . $current_time . '.' . $image->getClientOriginalExtension();
+                        $image->move($destinationPath, $unique_image_name);
+                        $EventParticipantsAsset = new EventParticipantsAsset();
+                        $EventParticipantsAsset->event_p_id = $members['event_p_id'];
+                        $EventParticipantsAsset->asset_type =  $request->asset_type;
+                        $EventParticipantsAsset->assets = $unique_image_name;
+                        $EventParticipantsAsset->save();
+                    }
+                }else{
+                    return redirect('participants/uploadform/'.$request->event_id."/".$members['event_p_id'])->with('failed', 'You already have 4 assets.so you cannot upload more.');
+
+                }
+            }
         }
+        if($request->asset_type == "video") {
+            if ($this->validate($request, [
+                'video' => 'required',
+            ])) {
 
-
-        die('sjkahdjkshajkdhkad');
-
+                $EventParticipantsAsset = new EventParticipantsAsset();
+                $EventParticipantsAsset->event_p_id = $members['event_p_id'];
+                $EventParticipantsAsset->asset_type =  $request->asset_type;
+                $EventParticipantsAsset->assets = "https://www.youtube.com/embed/".$request->video;
+                $EventParticipantsAsset->save();
+            }
+        }
+        return redirect('participants/details/'.$members['event_p_id'])->with('success', 'Assets Upload Successfully.');
     }
 }

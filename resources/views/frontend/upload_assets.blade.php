@@ -30,12 +30,14 @@
                 <div class="col-lg-5">
                     <div class="section-title">
                         <div class="title-text pl">
-                            <h2>Upload Assets</h2>
+                            <h2>Upload Content</h2>
                         </div>
                     </div>
                 </div>
             </div>
-
+            @if ( session()->has('failed') )
+                <div class="alert alert-success text-center">{{ session()->get('failed') }}</div>
+            @endif
             <div style="display: none;" id="success_message" class="alert alert-success"></div>
             <div style="display: none;" id="failed_message" class="alert alert-danger"></div>
             <!-- /col-->
@@ -45,7 +47,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="contact-form">
-                                    <form id="contact-form" data-toggle="validator" action="{{url('participants/uploadassets')}}" role="form" method="POST">
+                                    <form id="contact-form" enctype="multipart/form-data" data-toggle="validator" action="{{url('participants/uploadassets')}}" role="form" method="POST">
                                         {{csrf_field()}}
                                         {{--@if ($errors->any())--}}
                                         {{--<div class="alert alert-danger">--}}
@@ -57,29 +59,40 @@
                                         {{--</div>--}}
                                         {{--@endif--}}
                                         <input type="hidden" name="event_id" id="event_id" value="{{$event['id']}}">
+                                        <input type="hidden" name="event_p_email" id="event_p_email" value="{{session()->get('user_email')}}">
 
                                         <div class="form-group">
 
-                                            <label for="asset_type" class="control-label">{{ 'asset_type' }}<span class="require">*</span></label>
-                                            <div class="col-md-6">
-                                                <input name="asset_type" type="radio"
-                                                       id="asset_type"  data-id = "image_upload" checked>Image
-                                                <input name="asset_type" data-id = "video_upload" type="radio"
-                                                       id="asset_type">Video
-                                                {!! $errors->first('asset_type', '<p class="help-block">:message</p>') !!}
-                                            </div>
+                                            <h6>Type*</h6>
+                                            <br/>
+
+                                            {{--<div class="radio">--}}
+                                                <label class="radio-inline" style="margin-right: 100px"><input name="asset_type" type="radio" value="image"
+                                                              id="asset_type"  data-id = "image_upload" checked> Image</label>
+
+                                                <label class="radio-inline" ><input name="asset_type" data-id = "video_upload" value="video" type="radio"
+                                                              id="asset_type"> Video</label>
+                                            {{--</div>--}}
                                         </div>
 
                                         <div class="form-group " id="image_upload">
-                                            <label for="images" class="control-label">{{ 'Upload Image' }}</label>
-                                            <input id="images" type="file" accept="image/*" name="images[]" multiple value="{!! old('images') !!}" class="{{ $errors->has('images') ? 'alert alert-danger' : ''}} form-control">
+                                            <h6>{{ 'Choose Image*' }}</h6>
+                                            <br/>
+                                            <input id="images" type="file" accept="image/*" name="images[]" multiple class="form-control">
+                                            {!! $errors->first('images', '<p class="help-block">:message</p>') !!}
+                                            <span>Note: Press Ctrl key to select multiple images.</span>
                                             <p id="images_error"></p>
                                         </div>
                                         <div class="form-group" id="video_upload" style="display: none;">
-                                            <label for="video" class="control-label">{{ 'Upload Video Link' }}</label>
-                                            <input id="video" type="text"  accept="video/*" name="video" value="{!! old('video') !!}" placeholder="Enter YouTube Url" class="{{ $errors->has('video') ? 'alert alert-danger' : ''}} form-control">
+                                            <h6>{{ 'Enter Video Link*' }}</h6>
+                                            <br/>
+                                            https://www.youtube.com/<input id="video" type="text"  accept="video/*" name="video" placeholder="Enter YouTube Video Code" style="display: inline ; width:40%" class="text-center {{ $errors->has('video') ? 'alert alert-danger' : ''}} form-control">
+                                            <br/><br/>
+                                            <span>For example: https://www.youtube.com/watch?v=<mark>aBcdg7t9M4k</mark></span>
                                             <p id="video_error"></p>
                                         </div>
+                                        {!! $errors->first('video', '<p class="help-block">:message</p>') !!}
+
                                         <div class="btn-2 text-center">
                                             <button class="btn-primary" id="upload" name="submit-form" type="submit">Upload</button>
                                         </div>

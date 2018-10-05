@@ -36,6 +36,13 @@
                                     <div id="success"></div>
                                     <form id="contact-form" data-toggle="validator" action="javascript:void(0)" role="form" method="POST">
                                         {{csrf_field()}}
+                                        <div class="col-lg-12">
+                                            <div class="section-title text-center">
+                                                <div class="title-text mb50">
+                                                    <h2>User Verification</h2>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <input type="hidden" id="event_id" name="event_id" value="{{$event_details['id']}}">
                                         <div class="form-group">
                                             <input id="email" type="text" name="email" class="form-control" placeholder="Enter Email*" >
@@ -47,21 +54,28 @@
                                         </div>
 
                                         <div class="btn-2 text-center">
-                                            <button class="btn-primary" id="email_submit" name="submit-form" type="">Send</button>
+                                            <button class="btn-primary" id="email_submit" name="submit-form" type="">Verify</button>
                                         </div>
 
                                     </form>
                                     <form id="otp-form" data-toggle="validator" action="javascript:void(0)" style="display: none" role="form" method="POST">
                                         {{--<div id="error"></div>--}}
                                         {{--<div id="success"></div>--}}
-                                        <sapn>Please enter OTP below :</sapn>
+                                        <div class="col-lg-12">
+                                            <div class="section-title text-center">
+                                                <div class="title-text mb50">
+                                                    <h2>OTP Verification</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--<sapn>Please enter OTP below :</sapn>--}}
                                         <div class="form-group">
                                             <input id="otp" type="text" name="otp" class="form-control" placeholder="Enter OTP*" >
                                             <div class="help-block with-errors"></div>
                                         </div>
 
                                         <div class="btn-2 text-center">
-                                            <button class="btn-primary" id="otp_submit" name="submit-form" type="">Send</button>
+                                            <button class="btn-primary" id="otp_submit" name="submit-form" type="">Verify</button>
                                             <button class="btn-primary" id="otp_resend" name="submit-form" type="">Resend</button>
                                         </div>
                                     </form>

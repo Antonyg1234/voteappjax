@@ -497,7 +497,7 @@ a {
   background-image: url(../img/slide/1.jpg); }
 
 .hero-bg-2 {
-  background-image: url(../images/ganesha2.png); 
+  background-image: url(../images/banner.jpg);
   background-size: auto;
   background-position: center center;
 }
@@ -2387,3 +2387,8 @@ button.sub-btn.btn-primary a{
 }
 
 .cards-flex{ display:flex; }
+
+mark {
+    background-color: yellow;
+    color: black;
+}
