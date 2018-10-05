@@ -48,48 +48,49 @@
             <!-- /.row  end-->
             <div class="row mb50">
                 @foreach($participant_teams as $index => $team)
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 participants-cards">
-                    <div class="speakers xs-mb30">
-                        <div class="">
-
-                            @foreach($team['assets'] as $key => $asset)
-                                    @if($asset['asset_type'] == 'image')
-                                        @if($key ==0)
-                                        <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}">
-                                            <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
-                                        </a>
-                                        @else
-                                        <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}" style="display:none">
-                                            <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
-                                        </a>
-                                        @endif
-                                    @else
-                                        <iframe width="250" height="180" src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                                        </iframe>
+                    @if($team['assets'])
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 participants-cards">
+                            <div class="speakers xs-mb30">
+                                <div class="">
+                                    @foreach($team['assets'] as $key => $asset)
+                                            @if($asset['asset_type'] == 'image')
+                                                @if($key ==0)
+                                                <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}">
+                                                    <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
+                                                </a>
+                                                @else
+                                                <a href="{{$asset['assets']}}" data-lightbox="display{{$index}}" style="display:none">
+                                                    <img class="img-fluid" src="{{$asset['assets']}}" alt="trainer-img">
+                                                </a>
+                                                @endif
+                                            @else
+                                                <iframe width="250" height="180" src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                                </iframe>
+                                            @endif
+                                    @endforeach
+                                    {{--<ul>--}}
+                                        {{--<li><a href="#" style="color:red">Click</a></li>--}}
+                                        {{--<li><a href="#" style="color:red">To</a></li>--}}
+                                        {{--<li><a href="#" style="margin-left: 15px;font-size: 20px;color:red">Vote</a></li>--}}
+                                    {{--</ul>--}}
+                                </div>
+                                <div class="spk-info">
+                                    <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
+                                    <p>Captain : {{$team['contact_person']}}</p>
+                                    @if(!$event['voting_end_date']['smaller'])
+                                        <button class="sub-btn btn-primary">
+                                            <a href="{{url('vote',$team['id'])}}">Vote</a>
+                                        </button>
                                     @endif
-                            @endforeach
-                            {{--<ul>--}}
-                                {{--<li><a href="#" style="color:red">Click</a></li>--}}
-                                {{--<li><a href="#" style="color:red">To</a></li>--}}
-                                {{--<li><a href="#" style="margin-left: 15px;font-size: 20px;color:red">Vote</a></li>--}}
-                            {{--</ul>--}}
+                                </div>
+                                <div style="display: none">
+                                    @foreach($team['assets'] as $asset)
+                                        <a href="#">{{$asset['assets']}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                        <div class="spk-info">
-                            <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
-                            <p>Captain : {{$team['contact_person']}}</p>
-                            @if(!$event['voting_end_date']['smaller'])
-                                <button class="sub-btn btn-primary">
-                                    <a href="{{url('vote',$team['id'])}}">Vote</a>
-                                </button>
-                            @endif
-                        </div>
-                        <div style="display: none">
-                            @foreach($team['assets'] as $asset)
-                                <a href="#">{{$asset['assets']}}</a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                    @endif
                 @endforeach
             </div>
 
