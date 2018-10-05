@@ -87,6 +87,7 @@
     <script>
         var otpSenderUrl = "{{url('vote/sendOtp')}}";
         var voteUrl = "{{url('vote/otp')}}";
+        var successUrl = "{{url('participants/')}}";
     </script>
     <script src="{{asset('frontend/js/otp.js')}}"></script>
 

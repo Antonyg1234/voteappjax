@@ -89,7 +89,7 @@ $(document).ready(function() {
                         $('#error').html('');
                         $('#otp-form').hide();
                         $('#contact-form').show();
-                        location.href = "/participants/"+event_id;
+                        location.href = successUrl+event_id;
                     }else{
                         $('#success').html('');
                         $('#error').fadeIn();
