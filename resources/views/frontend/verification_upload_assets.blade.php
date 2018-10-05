@@ -98,6 +98,7 @@
     <script>
         var uploadOtpSenderUrl = "{{url('participants/sendOtpforupload')}}";
         var otpverficationUrl = "{{url('participants/verify')}}";
+        var uploadform ="{{url('/participants/uploadform/')}}"
     </script>
     <script src="{{asset('frontend/js/verification.js')}}"></script>
 

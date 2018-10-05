@@ -59,6 +59,7 @@ $(document).ready(function() {
     });
 
     $('#otp_submit').click(function() {
+        alert(uploadform);
         $('#error').val('');
         var otp = $('#otp').val();
         $.ajaxSetup({
@@ -80,7 +81,7 @@ $(document).ready(function() {
                     $('#error').html('');
                     $('#otp-form').hide();
                     $('#contact-form').show();
-                    location.href = "/participants/uploadform/"+event_id+"/"+response.event_p_id;
+                    location.href = uploadform+"/"+event_id+"/"+response.event_p_id;
                 }else{
                     $('#success').html('');
                     $('#error').fadeIn();
