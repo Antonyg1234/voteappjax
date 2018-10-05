@@ -110,7 +110,7 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "POST",
-            url: otpSenderUrl,
+            url: uploadOtpSenderUrl,
             data: {resend_flag: resend_flag, event_p_id: event_p_id, event_id: event_id},
             dataType: 'json',
             success: function (response) {
