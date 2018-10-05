@@ -773,19 +773,19 @@ a {
         font-size: 70px;
         font-weight: 700;
         line-height: 70px;
-        color: #fff;
+        color: #000;
         text-align: center;
         background: transparent; }
         .hero-banner-area.home-2 .upcoming div .cdown p {
-          color: #fff;
+          color: #000;
           display: block;
           font-weight: 600;
           margin-bottom: 0;
           margin-top: 10px; }
       .hero-banner-area.home-2 .upcoming div span:nth-child(even) {
-        color: #fff; }
+        color: #000; }
         .hero-banner-area.home-2 .upcoming div span:nth-child(even) p {
-          color: #fff; }
+          color: #000; }
   .hero-banner-area.home-2 .banner-content {
     display: -webkit-box;
     display: -ms-flexbox;
