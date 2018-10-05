@@ -187,7 +187,7 @@ $(document).ready(function() {
         $('#allmembers').val(JSON.stringify(jsonObj));
     }
 
-    $('.member').click(function() {
+    $('.member').focus(function() {
         $('#add_members').show();
     });
 });
