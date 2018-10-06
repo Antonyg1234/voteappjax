@@ -35,6 +35,14 @@
                                     <div id="success"></div>
                                     <form id="contact-form" data-toggle="validator" action="javascript:void(0)" role="form" method="POST">
                                         {{csrf_field()}}
+                                        <div class="col-lg-12">
+                                            <div class="section-title text-center">
+                                                <div class="title-text mb50">
+                                                    <h2>User Verification</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;Note: Enter MIS credential for verification. </span>
                                         <input type="hidden" id="event_praticipants_id" name="event_praticipants_id" value="{{$event_participant['participants_id']}}">
                                         <input type="hidden" id="event_id" name="event_id" value="{{$event_participant['event_id']}}">
                                         <div class="form-group">
@@ -54,7 +62,13 @@
                                     <form id="otp-form" data-toggle="validator" action="javascript:void(0)" style="display: none" role="form" method="POST">
                                         {{--<div id="error"></div>--}}
                                         {{--<div id="success"></div>--}}
-                                        <sapn>Please enter OTP below :</sapn>
+                                        <div class="col-lg-12">
+                                            <div class="section-title text-center">
+                                                <div class="title-text mb50">
+                                                    <h2>OTP Verification</h2>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <input id="otp" type="text" name="otp" class="form-control" placeholder="Enter OTP*" >
                                             <div class="help-block with-errors"></div>

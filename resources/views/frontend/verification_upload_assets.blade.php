@@ -42,6 +42,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;Note: Enter MIS credential for verification. </span>
+                                        <br/><br/>
                                         <input type="hidden" id="event_id" name="event_id" value="{{$event_details['id']}}">
                                         <div class="form-group">
                                             <input id="email" type="text" name="email" class="form-control" placeholder="Enter Email*" >
