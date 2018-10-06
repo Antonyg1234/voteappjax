@@ -69,9 +69,9 @@
                                 <tr class="inner-box">
                                     <th scope="row">
                                         <div class="event-date">
-                                            <span>{{$event['event_date'][0]}}</span>
-                                            <p>{{$event['event_date'][1]}}</p>
-                                            <p>{{$event['event_date'][2]}}</p>
+                                            <span>{{$event->modifiedEventDate[0]}}</span>
+                                            <p>{{$event->modifiedEventDate[1]}}</p>
+                                            <p>{{$event->modifiedEventDate[2]}}</p>
                                         </div>
                                     </th>
                                     <td>
@@ -87,7 +87,7 @@
                                                     <a href="{{url('register',$event['id'])}}">{{$event['description']}}</a>
                                                 </div>
                                                 <div class="time">
-                                                    <span>{{$event['event_date'][3]." ".$event['event_date'][4]}}</span>
+                                                    <span>{{$event->modifiedEventDate[3]." ".$event->modifiedEventDate[4]}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,9 +133,10 @@
                                 <tr onclick="document.location = '{{url('participants',$event['id'])}}';" class="inner-box">
                                     <th scope="row">
                                         <div class="event-date">
-                                            <span>{{$event['event_date'][0]}}</span>
-                                            <p>{{$event['event_date'][1]}}</p>
-                                            <p>{{$event['event_date'][2]}}</p>
+                                            <span>{{$event->modifiedEventDate[0]}}</span>
+                                            <p>{{$event->modifiedEventDate[1]}}</p>
+                                            <p>{{$event->modifiedEventDate[2]}}</p>
+
                                         </div>
                                     </th>
                                     <td>
@@ -151,7 +152,7 @@
                                                     <a href="{{url('participants',$event['id'])}}">{{$event['description']}}</a>
                                                 </div>
                                                 <div class="time">
-                                                    <span>{{$event['event_date'][3]." ".$event['event_date'][4]}}</span>
+                                                    <span>{{$event->modifiedEventDate[3]." ".$event->modifiedEventDate[4]}}</span>
                                                 </div>
                                             </div>
                                         </div>

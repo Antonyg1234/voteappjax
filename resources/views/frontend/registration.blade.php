@@ -56,12 +56,12 @@
                                     {{--@endif--}}
                                     <input type="hidden" name="event_id" id="event_id" value="{{$event['id']}}">
                                     <div class="form-group ">
-                                        <input id="team_name" type="text" name="team_name" value="{!! old('team_name') !!}" class="{{ $errors->has('team_name') ? 'alert alert-danger' : ''}} form-control" placeholder="Team Name*" required>
+                                        <input id="team_name" type="text" name="team_name" value="{!! old('team_name') !!}" class="captialize {{ $errors->has('team_name') ? 'alert alert-danger' : ''}} form-control" placeholder="Team Name*" required>
                                         {!! $errors->first('team_name', '<p class="help-block">:message</p>') !!}
                                         <p id="team_name_error"></p>
                                     </div>
                                     <div class="form-group">
-                                        <input id="title" type="text" name="title" value="{!! old('title') !!}" class="{{ $errors->has('title') ? 'alert alert-danger' : ''}} form-control" placeholder="Activity Title*" >
+                                        <input id="title" type="text" name="title" value="{!! old('title') !!}" class="captialize {{ $errors->has('title') ? 'alert alert-danger' : ''}} form-control" placeholder="Activity Title*" >
                                         {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                                         <p id="title_error"></p>
                                     </div>
@@ -72,7 +72,7 @@
                                         <p id="description_error"></p>
                                     </div>
                                     <div class="form-group">
-                                        <input id="contact_person" type="text" name="contact_person" value="{!! old('contact_person') !!}" class="{{ $errors->has('contact_person') ? 'alert alert-danger' : ''}} form-control" placeholder="Contact Person*" >
+                                        <input id="contact_person" type="text" name="contact_person" value="{!! old('contact_person') !!}" class="captialize {{ $errors->has('contact_person') ? 'alert alert-danger' : ''}} form-control" placeholder="Contact Person*" >
                                         {!! $errors->first('contact_person', '<p class="help-block">:message</p>') !!}
                                         <p id="contact_person_name_error"></p>
                                     </div>
@@ -95,7 +95,7 @@
                                         <div id="success"></div>
                                         <div id="error"></div>
                                         <div class="form-group">
-                                            <input id="member_name" type="text" name="member-name" value="{!! old('member_name') !!}" class="member form-control" placeholder="Member Name*" >
+                                            <input id="member_name" type="text" name="member-name" value="{!! old('member_name') !!}" class="captialize member form-control" placeholder="Member Name*" >
                                             <p class="" id="member_name_error"></p>
                                         </div>
                                         <div class="form-group">

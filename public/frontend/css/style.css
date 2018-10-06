@@ -2393,3 +2393,8 @@ mark {
     color: #2b2828;
     font-weight: bold;
 }
+
+
+.captialize{
+    text-transform: capitalize;
+}

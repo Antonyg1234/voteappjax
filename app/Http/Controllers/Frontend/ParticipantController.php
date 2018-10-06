@@ -251,7 +251,7 @@ class ParticipantController extends Controller
                 $EventParticipantsAsset = new EventParticipantsAsset();
                 $EventParticipantsAsset->event_p_id = $members['event_p_id'];
                 $EventParticipantsAsset->asset_type =  $request->asset_type;
-                $EventParticipantsAsset->assets = "https://www.youtube.com/embed/".$request->video;
+                $EventParticipantsAsset->assets = "https://www.youtube.com/embed/".trim($request->video);
                 $EventParticipantsAsset->save();
             }
         }
