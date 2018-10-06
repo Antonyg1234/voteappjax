@@ -13,8 +13,9 @@
                         <div data-countdown="{{$upcoming_event_time}}"></div>
                     </div>
                 </div>
+                 <br/>
                 @if ( session()->has('success') )
-                    <div class="alert alert-success">{{ session()->get('success') }}</div>
+                    <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
                 @endif
             </div>
             <!-- /col end-->
@@ -164,11 +165,19 @@
                                     </td>
                                     <td>
                                         <div class="primary-btn">
+                                            {{--@php--}}
+                                                {{--$uploadcontent = date("Y-m-d h:i:s", strtotime("+1 day", strtotime($event->event_date)));--}}
+                                                {{--$vote = date("Y-m-d h:i:s", strtotime("+3 day", strtotime($event->event_date)));--}}
+                                                {{--$view = date("Y-m-d h:i:s", strtotime("+4 day", strtotime($event->event_date)));--}}
+                                            {{--@endphp--}}
                                             @php
-                                                $NewDate = date("Y-m-d h:i:s", strtotime("+1 day", strtotime($event->event_date)));
+                                                $today = \Carbon\Carbon::now();
+
                                             @endphp
-                                            @if(Carbon\Carbon::parse($NewDate)->gt(Carbon\Carbon::now()))
+                                            @if($today < $event->voting_start_date)
                                                 <a class="btn btn-sm btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload Content</a>
+                                            @elseif($today < $event->voting_end_date)
+                                                <a class="btn-primary" href="{{url('participants',$event['id'])}}">Vote</a>
                                             @else
                                                 <a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>
                                             @endif

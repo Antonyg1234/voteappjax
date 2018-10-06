@@ -52,7 +52,7 @@
                         <h1>{{$details['team_name']}}</h1>
                         <span>{{implode(', ', array_column($details['members'],'name'))}}</span>
                         <p>{{$details['title']}}</p>
-                        <p class="mb-0">{{$details['description']}}</p>
+                        <p class="mb-0">{!! $details['description'] !!} </p>
                         {{--<div class="social-icon">--}}
                         {{--<ul>--}}
                         {{--<li><a href="#"><i class="fa fa-facebook"></i></a></li>--}}

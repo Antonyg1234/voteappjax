@@ -59,7 +59,6 @@ $(document).ready(function() {
     });
 
     $('#otp_submit').click(function() {
-        alert(uploadform);
         $('#error').val('');
         var otp = $('#otp').val();
         $.ajaxSetup({

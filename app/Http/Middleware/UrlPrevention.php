@@ -16,7 +16,7 @@ class UrlPrevention
      */
     public function handle($request, Closure $next)
     {
-        $voting_end_date = EventMaster::select('voting_end_date')->where('id',$request->id)->first();
+        $voting_end_date = EventMaster::select('voting_end_date')->where('id',$request->event_id)->first();
         $date = $voting_end_date->toArray();
         if (!$date['voting_end_date']['smaller']){
             return $next($request);
