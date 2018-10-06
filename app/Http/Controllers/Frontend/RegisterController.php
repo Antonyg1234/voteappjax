@@ -52,24 +52,24 @@ class RegisterController extends Controller
                 'mobile' => 'required|digits:10|numeric',
             ])) {
 
-                $email_availablity_as_member = EventParticipantsMember::where('email', $request->email)
-                    ->where('event_id', $request->event_id)
-                    ->get()
-                    ->count();
+                $event_participant = new EventParticipant();
+                $event_participant->event_id = $request->event_id;
+                $event_participant->team_name = ucfirst($request->team_name);
+                $event_participant->title = ucfirst($request->title);
+                $event_participant->description = $request->description;
+                $event_participant->contact_person = ucfirst($request->contact_person);
+                $event_participant->email = $request->email;
+                $event_participant->mobile = $request->mobile;
+                $event_participant->save();
 
-                if ($email_availablity_as_member == 0) {
+                $event_p_id = $event_participant->id;
 
-                    $event_participant = new EventParticipant();
-                    $event_participant->event_id = $request->event_id;
-                    $event_participant->team_name = ucfirst($request->team_name);
-                    $event_participant->title = ucfirst($request->title);
-                    $event_participant->description = $request->description;
-                    $event_participant->contact_person = ucfirst($request->contact_person);
-                    $event_participant->email = $request->email;
-                    $event_participant->mobile = $request->mobile;
-                    $event_participant->save();
+//                $email_availablity_as_member = EventParticipantsMember::where('email', $request->email)
+//                    ->where('event_id', $request->event_id)
+//                    ->get()
+//                    ->count();
 
-                    $event_p_id = $event_participant->id;
+//                if ($email_availablity_as_member == 0) {
 
                     $members_registerd = EventParticipantsMember::select('email')->where('event_id',$request->event_id)->get()->toArray();
 
@@ -79,7 +79,7 @@ class RegisterController extends Controller
                             if (in_array($member['member_email'], $members_registerd)) {
                                 return response()->json(array(
                                     'success' => false,
-                                    'message' => $member['member_email'].' already register for this event.'
+                                    'message' => $member['member_email'].' is already register for this event.'
 
                                 ));
                             } else {
@@ -98,16 +98,15 @@ class RegisterController extends Controller
                             'success' => true,
                             'message' => 'You have been registered successfully for this event.'
                         ));
+                    }else {
+                        return response()->json(array(
+                            'success' => false,
+                            'message' => 'Please Add Members'
+                        ));
                     }
                 }
-                else {
-                    return response()->json(array(
-                        'success' => false,
-                        'message' => 'Sorry, '.$request->email.' already have been registered'
-                    ));
-                }
+
             }
-        }
     }
 
     /**

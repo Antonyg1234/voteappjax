@@ -258,6 +258,10 @@ class ParticipantController extends Controller
             }
         }
         session()->forget('user_email');
+        session()->forget('otpcode');
+        session()->forget('password');
+        session()->forget('event_p_id');
+
         return redirect('participants/details/'.$members['event_p_id'])->with('success', 'Assets Upload Successfully.');
     }
 }

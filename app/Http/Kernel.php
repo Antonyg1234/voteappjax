@@ -59,6 +59,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'urlprevention' => \App\Http\Middleware\UrlPrevention::class,
         'uploadurlprevention' => \App\Http\Middleware\UploadUrlPrevention::class,
+        'register' => \App\Http\Middleware\PreventRegisterUrl::class,
+
 
     ];
 }

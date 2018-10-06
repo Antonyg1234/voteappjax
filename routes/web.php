@@ -36,4 +36,4 @@ Route::get('vote/test','Frontend\VoteController@test');
 
 //Register
 Route::post('register/checkemail', 'Frontend\RegisterController@checkEmailExistence');
-Route::resource('register','Frontend\RegisterController');
+Route::resource('register','Frontend\RegisterController')->middleware('register');
