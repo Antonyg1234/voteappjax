@@ -238,6 +238,7 @@ class ParticipantController extends Controller
                         $EventParticipantsAsset->save();
                     }
                 }else{
+                    session()->forget('user_email');
                     return redirect('participants/uploadform/'.$request->event_id."/".$members['event_p_id'])->with('failed', 'You already have 4 assets.so you cannot upload more.');
 
                 }
@@ -253,8 +254,10 @@ class ParticipantController extends Controller
                 $EventParticipantsAsset->asset_type =  $request->asset_type;
                 $EventParticipantsAsset->assets = "https://www.youtube.com/embed/".trim($request->video);
                 $EventParticipantsAsset->save();
+                session()->forget('user_email');
             }
         }
+        session()->forget('user_email');
         return redirect('participants/details/'.$members['event_p_id'])->with('success', 'Assets Upload Successfully.');
     }
 }
