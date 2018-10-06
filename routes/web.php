@@ -20,15 +20,15 @@ Route::get('participants/details/{id}','Frontend\ParticipantController@details')
 Route::get('participants/result/{id}','Frontend\ParticipantController@result');
 
 Route::get('participants/upload/{id}','Frontend\ParticipantController@verificationForUploadAssets');
-Route::post('participants/sendOtpforupload','Frontend\ParticipantController@sendOtpForUpload')->middleware('uploadurlprevention');
-Route::post('participants/verify','Frontend\ParticipantController@otpVerification')->middleware('uploadurlprevention');
+Route::post('participants/sendOtpforupload','Frontend\ParticipantController@sendOtpForUpload');
+Route::post('participants/verify','Frontend\ParticipantController@otpVerification');
 Route::get('participants/uploadform/{id}/{event_p_id}','Frontend\ParticipantController@uploadAssetsForm')->middleware('uploadurlprevention');
 Route::post('participants/uploadassets','Frontend\ParticipantController@uploadAssets');
 
 //Vote Participants
 Route::get('vote/{id}','Frontend\VoteController@index');
 Route::post('vote/sendOtp','Frontend\VoteController@sendOtp');
-Route::post('vote/otp','Frontend\VoteController@otp');
+Route::post('vote/otp','Frontend\VoteController@otp')->middleware('urlprevention');
 Route::get('vote/test','Frontend\VoteController@test');
 
 //Route::post('vote/post',['as'=>'vote.post','uses'=>'Frontend\VoteController@post']);
