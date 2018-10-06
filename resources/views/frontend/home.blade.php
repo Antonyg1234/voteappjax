@@ -164,9 +164,14 @@
                                     </td>
                                     <td>
                                         <div class="primary-btn">
-                                            {{--<a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>--}}
-                                            {{--<br/><br/>--}}
-                                            <a class="btn btn-sm btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload Content</a>
+                                            @php
+                                                $NewDate = date("Y-m-d h:i:s", strtotime("+1 day", strtotime($event->event_date)));
+                                            @endphp
+                                            @if(Carbon\Carbon::parse($NewDate)->gt(Carbon\Carbon::now()))
+                                                <a class="btn btn-sm btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload Content</a>
+                                            @else
+                                                <a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
