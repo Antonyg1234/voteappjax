@@ -43,8 +43,6 @@ class RegisterController extends Controller
     {
         if ($request->ajax()) {
 
-//            print_r($request->allmembers);die();
-
             if ($this->validate($request, [
                 'team_name' => 'required',
                 'title' => 'required',
@@ -63,10 +61,10 @@ class RegisterController extends Controller
 
                     $event_participant = new EventParticipant();
                     $event_participant->event_id = $request->event_id;
-                    $event_participant->team_name = $request->team_name;
-                    $event_participant->title = $request->title;
+                    $event_participant->team_name = ucfirst($request->team_name);
+                    $event_participant->title = ucfirst($request->title);
                     $event_participant->description = $request->description;
-                    $event_participant->contact_person = $request->contact_person;
+                    $event_participant->contact_person = ucfirst($request->contact_person);
                     $event_participant->email = $request->email;
                     $event_participant->mobile = $request->mobile;
                     $event_participant->save();
@@ -88,7 +86,7 @@ class RegisterController extends Controller
                                 $event_members = new EventParticipantsMember();
                                 $event_members->event_p_id = $event_p_id;
                                 $event_members->event_id = $request->event_id;
-                                $event_members->name = $member['member_name'];
+                                $event_members->name = ucfirst($member['member_name']);
                                 $event_members->email = $member['member_email'];
                                 $event_members->mobile = $member['member_mobile'];
                                 $event_members->save();

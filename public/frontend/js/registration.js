@@ -33,13 +33,15 @@ $(document).ready(function() {
 
 
         function memberAvailabilty(){
-            var members = jQuery.parseJSON(allmembers)
+            var members = jQuery.parseJSON(allmembers);
+            console.log(members);
+            alert(members.length);
             if(members.length){
                 return true;
                 // alert(members.length);
 
             }else{
-                        // alert('PLease add');
+                        alert('PLease add');
                 $("#error").html("Please add team members");
                 $("#error").addClass("alert alert-danger");
                 return false;

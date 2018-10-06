@@ -45,7 +45,7 @@ $(document).ready(function() {
                             $('#member-list').show();
                         }
                         $('#member-data').append('<tr class="inner-box text-center">' +
-                            '<td>'+memberName+'</td>' +
+                            '<td class="text-capitalize">'+memberName+'</td>' +
                             '<td>'+memberEmail+'</td>' +
                             '<td>'+memberMobile+'</td>' +
                             '<td class="btnX"><a id="'+memberEmail+'" class="removebtn"><span class="fa fa-trash"></span></a></td>'+
