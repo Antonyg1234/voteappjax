@@ -122,7 +122,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">Date</th>
-                                    <th scope="col"></th>
+                                    {{--<th scope="col"></th>--}}
                                     <th scope="col">Description</th>
                                     <th scope="col">Venue</th>
                                     <th scope="col"></th>
@@ -140,11 +140,11 @@
 
                                         </div>
                                     </th>
-                                    <td>
-                                        <div class="event-img">
-                                            <img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">
-                                        </div>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<div class="event-img">--}}
+                                            {{--<img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">--}}
+                                        {{--</div>--}}
+                                    {{--</td>--}}
                                     <td>
                                         <div class="event-wrap">
                                             <h3><a href="{{url('participants',$event['id'])}}">{{$event['title']}}</a></h3>
