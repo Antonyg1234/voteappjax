@@ -118,7 +118,7 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" scope="col"></th>
+                                                <th class="text-center" scope="col">Contact Person</th>
                                                 <th class="text-center" scope="col">Name</th>
                                                 <th class="text-center" scope="col">Email</th>
                                                 <th class="text-center" scope="col">Mobile Number</th>
