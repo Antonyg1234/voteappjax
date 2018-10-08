@@ -70,8 +70,13 @@
                 </div>
                 <!-- /.col end-->
             </div>
+                <br/>
             <!-- /.row end-->
-
+                <div class="text-lg-center">
+                    <button class="sub-btn btn-primary">
+                        <a href="{{url('participants',$event['id'])}}">View All Participants</a>
+                    </button>
+                </div>
         </div>
         <!-- /.container end-->
     </div>
