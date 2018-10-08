@@ -65,7 +65,7 @@
                                             <h1>{{$winner['team_name']}}</h1>
                                             <span>{{$winner['contact_person'].', '.implode(', ', array_column($winner['members'],'name'))}}</span>
                                             <p>{{$winner['title']}}</p>
-                                            <p class="mb-0">{{$winner['description']}}</p>
+                                            <p class="mb-0">{!! $winner['description'] !!}</p>
                                             @if($key == 0)
                                                 <span class="month">Winner</span>
                                             @elseif($key == 1)

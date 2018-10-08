@@ -17,16 +17,17 @@ class ParticipantController extends Controller
     public function index(Request $request){
         $participant_teams = EventParticipant::where('event_id','=',$request->id)->get();
 
-
+        $teamassets = 0;
         foreach($participant_teams as $key => $team){
             $assets = EventParticipantsAsset::where('event_p_id','=',$team['id'])->get();
             $team['assets'] = $assets->toArray();
+            if($team['assets'])
+                $teamassets++;
         }
-
         $event = EventMaster::where('id','=',$request->id)->first()->toArray();
 //        dd($event);
 
-        return view('frontend.participants',compact('participant_teams','event'));
+        return view('frontend.participants',compact('participant_teams','event','teamassets'));
     }
 
     public function details(Request $request){
@@ -207,9 +208,6 @@ class ParticipantController extends Controller
     }
 
     public function uploadAssets(Request $request){
-//        die('in upload contro');
-
-//
         $members =  EventParticipantsMember::select('email','event_p_id','event_id')
             ->where('event_id',$request->event_id)->where('email',$request->event_p_email)->first();
         $current_time = time();
@@ -262,6 +260,6 @@ class ParticipantController extends Controller
         session()->forget('password');
         session()->forget('event_p_id');
 
-        return redirect('participants/details/'.$members['event_p_id'])->with('success', 'Assets Upload Successfully.');
+        return redirect('participants/details/'.$members['event_p_id'])->with('success', 'Content Uploaded Successfully.');
     }
 }

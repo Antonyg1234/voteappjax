@@ -172,11 +172,10 @@
                                             {{--@endphp--}}
                                             @php
                                                 $today = \Carbon\Carbon::now();
-
                                             @endphp
                                             @if($today < $event->voting_start_date)
                                                 <a class="btn btn-sm btn-primary" href="{{url('participants/upload',$event['id'])}}">Upload Content</a>
-                                            @elseif($today < $event->voting_end_date)
+                                            @elseif(($today >= $event['voting_start_date'] && $today <= $event['voting_end_date']['date']))
                                                 <a class="btn-primary" href="{{url('participants',$event['id'])}}">Vote</a>
                                             @else
                                                 <a class="btn-primary" href="{{url('participants',$event['id'])}}">View</a>

@@ -33,10 +33,13 @@
                             @if ( session()->has('success') )
                                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                             @endif
+                            @php $today = \Carbon\Carbon::now(); @endphp
                             @if($event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
+                            @elseif((application_date_format($today) == application_date_format($event['event_date'])) && $today < application_date_format($event['voting_start_date']))
+                                <p>Voting start date is {{application_date_format($event['voting_start_date'])}}</p>
                             @else
                                 <p>Last date for voting is {{application_date_format($event['voting_end_date']['date'])}}</p>
                             @endif
@@ -74,10 +77,13 @@
                                         {{--<li><a href="#" style="margin-left: 15px;font-size: 20px;color:red">Vote</a></li>--}}
                                     {{--</ul>--}}
                                 </div>
+                                @php
+                                    $today = \Carbon\Carbon::now()->format('Y-m-d h:i:s');
+                                @endphp
                                 <div class="spk-info">
                                     <h3 style="font-size: 15px"><a href="{{url('participants/details',$team['id'])}}">{{$team['team_name']}}</a></h3>
-                                    <p>Captain : {{$team['contact_person']}}</p>
-                                    @if(!$event['voting_end_date']['smaller'])
+                                    <p>Contact Person : {{$team['contact_person']}}</p>
+                                    @if(($today >= $event['voting_start_date'] && $today <= $event['voting_end_date']['date']))
                                         <button class="sub-btn btn-primary">
                                             <a href="{{url('vote',$team['id'])}}">Vote</a>
                                         </button>
@@ -93,7 +99,9 @@
                     @endif
                 @endforeach
             </div>
-
+            @if(!($teamassets))
+                    <h6 class="text-center">Sorry, No content to display.</h6>
+            @endif
             <!-- /row end-->
         </div>
         <!-- /container end-->
