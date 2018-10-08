@@ -202,8 +202,10 @@ class ParticipantController extends Controller
     public function uploadAssetsForm(Request $request){
 
         $event = EventMaster::where('id',$request->id)->first();
+        $event_p_id = session()->get('event_p_id');
+        $asset_count = EventParticipantsAsset::where('event_p_id',$event_p_id)->get()->count();
 
-        return view('frontend.upload_assets',compact('event'));
+        return view('frontend.upload_assets',compact('event','asset_count'));
 
     }
 

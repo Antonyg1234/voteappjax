@@ -95,7 +95,10 @@
                                         <div class="btn-2 text-center">
                                             <button class="btn-primary" id="upload" name="submit-form" type="submit">Upload</button>
                                         </div>
-                                        <span>Note: Previously uploaded content will be deleted.</span>
+                                        <br/>
+                                        @if($asset_count)
+                                            <span>Note: Previously uploaded content will be deleted.</span>
+                                        @endif
                                     </form>
                                 </div>
                             </div>

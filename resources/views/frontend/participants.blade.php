@@ -33,12 +33,13 @@
                             @if ( session()->has('success') )
                                 <div class="alert alert-success">{{ session()->get('success') }}</div>
                             @endif
-                            @php $today = \Carbon\Carbon::now(); @endphp
+                            @php $today = \Carbon\Carbon::now();
+                            @endphp
                             @if($event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
-                            @elseif((application_date_format($today) == application_date_format($event['event_date'])) && $today < application_date_format($event['voting_start_date']))
+                            @elseif((application_date_format($today) == application_date_format($event['event_date'])) || application_date_format($today) < application_date_format($event['voting_start_date']))
                                 <p>Voting start date is {{application_date_format($event['voting_start_date'])}}</p>
                             @else
                                 <p>Last date for voting is {{application_date_format($event['voting_end_date']['date'])}}</p>
