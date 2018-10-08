@@ -35,14 +35,17 @@
                             @endif
                             @php $today = \Carbon\Carbon::now();
                             @endphp
+                            @if(($teamassets))
                             @if($event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
                                 </button>
                             @elseif((application_date_format($today) == application_date_format($event['event_date'])) || application_date_format($today) < application_date_format($event['voting_start_date']))
-                                <p>Voting start date is {{application_date_format($event['voting_start_date'])}}</p>
+                                    <p>Last date to upload content is {{application_date_format($event['voting_start_date'])}}</p>
+                                    <p>Voting start date is {{application_date_format($event['voting_start_date'])}}</p>
                             @else
                                 <p>Last date for voting is {{application_date_format($event['voting_end_date']['date'])}}</p>
+                            @endif
                             @endif
                         </div>
                     </div>
@@ -103,6 +106,9 @@
             @if(!($teamassets))
                     <h6 class="text-center">Sorry, No content to display.</h6>
             @endif
+
+{{--            {{ $participant_teams->links() }}--}}
+
             <!-- /row end-->
         </div>
         <!-- /container end-->
