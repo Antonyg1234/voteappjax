@@ -45,6 +45,7 @@ $(document).ready(function() {
                             $('#member-list').show();
                         }
                         $('#member-data').append('<tr class="inner-box text-center">' +
+                            '<td><label class=""><input type="radio" value="'+memberEmail+'" data-mobile="'+memberMobile+'" data-contactperson="'+memberName+'" name="member_id"></label></td>'+
                             '<td class="text-capitalize">'+memberName+'</td>' +
                             '<td>'+memberEmail+'</td>' +
                             '<td>'+memberMobile+'</td>' +

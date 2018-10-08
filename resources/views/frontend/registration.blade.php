@@ -71,21 +71,21 @@
                                         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                                         <p id="description_error"></p>
                                     </div>
-                                    <div class="form-group">
-                                        <input id="contact_person" type="text" name="contact_person" value="{!! old('contact_person') !!}" class="captialize {{ $errors->has('contact_person') ? 'alert alert-danger' : ''}} form-control" placeholder="Contact Person*" >
-                                        {!! $errors->first('contact_person', '<p class="help-block">:message</p>') !!}
-                                        <p id="contact_person_name_error"></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="email" type="email" name="email" value="{!! old('email') !!}" class="{{ $errors->has('email') ? 'alert alert-danger' : ''}} form-control" placeholder="Email*" >
-                                        {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-                                        <p id="leader_email_error"></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="mobile" type="number" min="0" name="mobile" value="{!! old('mobile') !!}" class="{{ $errors->has('mobile') ? 'alert alert-danger' : ''}} form-control" placeholder="Mobile*" >
-                                        {!! $errors->first('mobile', '<p class="help-block">:message</p>') !!}
-                                        <p id="mobile_error"></p>
-                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<input id="contact_person" type="text" name="contact_person" value="{!! old('contact_person') !!}" class="captialize {{ $errors->has('contact_person') ? 'alert alert-danger' : ''}} form-control" placeholder="Contact Person*" >--}}
+                                        {{--{!! $errors->first('contact_person', '<p class="help-block">:message</p>') !!}--}}
+                                        {{--<p id="contact_person_name_error"></p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<input id="email" type="email" name="email" value="{!! old('email') !!}" class="{{ $errors->has('email') ? 'alert alert-danger' : ''}} form-control" placeholder="Email*" >--}}
+                                        {{--{!! $errors->first('email', '<p class="help-block">:message</p>') !!}--}}
+                                        {{--<p id="leader_email_error"></p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<input id="mobile" type="number" min="0" name="mobile" value="{!! old('mobile') !!}" class="{{ $errors->has('mobile') ? 'alert alert-danger' : ''}} form-control" placeholder="Mobile*" >--}}
+                                        {{--{!! $errors->first('mobile', '<p class="help-block">:message</p>') !!}--}}
+                                        {{--<p id="mobile_error"></p>--}}
+                                    {{--</div>--}}
                                     <input type="hidden" name="allmembers" id="allmembers" value="">
 
                                     <div id="members">
@@ -112,9 +112,13 @@
                                     </div>
                                     <br/>
                                     <div id="member-list">
+                                        <div class="form-group">
+                                            <p class="" id="contact_person_error"></p>
+                                        </div>
                                         <table class="table">
                                             <thead>
                                             <tr>
+                                                <th class="text-center" scope="col"></th>
                                                 <th class="text-center" scope="col">Name</th>
                                                 <th class="text-center" scope="col">Email</th>
                                                 <th class="text-center" scope="col">Mobile Number</th>

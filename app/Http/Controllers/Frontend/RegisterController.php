@@ -42,7 +42,6 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-
             if ($this->validate($request, [
                 'team_name' => 'required',
                 'title' => 'required',

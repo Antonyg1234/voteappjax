@@ -9,19 +9,16 @@ $(document).ready(function() {
         // var description = $("#description").text();
         var description =  CKEDITOR.instances['description'].getData();
         // alert(description);
-        var contactPerson = $("#contact_person").val();
-        var leaderEmail = $("#email").val();
-        var mobile = $("#mobile").val();
+        var leaderEmail = $('input:radio[name=member_id]:checked').val();
+        var mobile = $("input:radio[name=member_id]:checked").attr("data-mobile");
         var event_id = $('#event_id').val();
         var allmembers = $('#allmembers').val();
-
+        var contactPerson =  $("input:radio[name=member_id]:checked").attr("data-contactperson");
         var teamname_validate = teamNameValidate(teamName);
         var title_validate = titleValidate(title);
         var description_validate = descriptionValidate(description);
-        var contactperson_validate = contactPersonValidate(contactPerson);
-        var mobile_validate = mobileValidate(mobile);
-        var email_validate = emailValidate(leaderEmail,allmembers);
         var availabilty_validate = memberAvailabilty();
+        var contact_person_details = contcatPersonDetails(contactPerson,mobile,leaderEmail);
 
         // var members = jQuery.parseJSON(allmembers);
         // alert(members.length);
@@ -30,7 +27,15 @@ $(document).ready(function() {
         //     teamNameValidate();
         // });
 
-
+        function contcatPersonDetails(contactPerson,mobile,leaderEmail){
+            if(contactPerson && mobile && leaderEmail){
+                return true;
+            }else{
+                $("#contact_person_error").html("Please make one of the member as contact person");
+                $("#contact_person_error").addClass("alert alert-danger");
+                return false;
+            }
+        }
 
         function memberAvailabilty(){
 
@@ -87,8 +92,7 @@ $(document).ready(function() {
         //     }
         // }
 
-        if(teamname_validate && title_validate && description_validate &&
-            contactperson_validate && mobile_validate && availabilty_validate && email_validate ) {
+        if(teamname_validate && title_validate && description_validate &&contact_person_details && availabilty_validate) {
 
             $.ajaxSetup({
                 headers: {
@@ -211,93 +215,5 @@ $(document).ready(function() {
         }
     }
 
-    $("#contact_person").blur(function () {
-        var contactPerson = $("#contact_person").val();
-        contactPersonValidate(contactPerson);
-    });
-
-    function contactPersonValidate(contactPerson)
-    {
-        var name = /^[A-Za-z ]+$/;
-
-        if (contactPerson == "" ){
-            $("#contact_person_name_error").html("Please enter contact person name.");
-            $("#contact_person_name_error").addClass("alert alert-danger");
-            return false;
-        }
-        else if ( !contactPerson.match(name) ){
-            $("#contact_person_name_error").html("Contact person name should have characters.");
-            $("#contact_person_name_error").addClass("alert alert-danger");
-            return false;
-        }
-        else{
-            $("#contact_person_name_error").html("");
-            $("#contact_person_name_error").removeClass("alert alert-danger");
-
-            return true;
-        }
-    }
-
-    $("#email").blur(function () {
-        var leaderEmail = $("#email").val();
-        var allmembers = $('#allmembers').val();
-        emailValidate(leaderEmail,allmembers);
-    });
-    function emailValidate(leaderEmail,allmembers) {
-        if(allmembers){
-            var members = jQuery.parseJSON(allmembers);
-            for (var i=0 ; i < members.length ; i++)
-            {
-                if (members[i].member_email == leaderEmail) {
-                    var available = true;
-                }
-            }
-        }else{
-            var available = false;
-        }
-
-        var email = /^([a-zA-Z\d\-\.]+)@([a-zA-Z]{2,11})\.([a-zA-Z]{2,4})$/;
-
-        if (leaderEmail == "" ){
-            $("#leader_email_error").html("Please Enter Email id.");
-            $("#leader_email_error").addClass("alert alert-danger");
-            return false;
-        }
-        else if (!leaderEmail.match(email)){
-            $("#leader_email_error").html("Please Enter valid email id.");
-            $("#leader_email_error").addClass("alert alert-danger");
-            return false;
-        }
-        else{
-            $("#leader_email_error").html("");
-            $("#leader_email_error").removeClass("alert alert-danger");
-            return true;
-        }
-    }
-
-    $("#mobile").blur(function () {
-        var mobile = $("#mobile").val();
-        mobileValidate(mobile);
-    });
-    function  mobileValidate(mobile) {
-
-        var number = /^[7-9]{1}[0-9]{9}$/;
-
-        if (mobile == "" ){
-            $("#mobile_error").html("Please Enter Phone number.");
-            $("#mobile_error").addClass("alert alert-danger");
-            return false;
-        }
-        else if (!mobile.match(number)){
-            $("#mobile_error").html("Please Enter 10 digits number.");
-            $("#mobile_error").addClass("alert alert-danger");
-            return false;
-        }
-        else{
-            $("#mobile_error").html("");
-            $("#mobile_error").removeClass("alert alert-danger");
-            return true;
-        }
-    }
 
 });
