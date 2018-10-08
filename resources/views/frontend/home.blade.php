@@ -58,7 +58,7 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center" scope="col">Date</th>
-                                    <th scope="col"></th>
+                                    {{--<th scope="col"></th>--}}
                                     <th scope="col">Description</th>
                                     <th scope="col">Venue</th>
                                     <th class="text-center" scope="col"></th>
@@ -75,11 +75,11 @@
                                             <p>{{$event->modifiedEventDate[2]}}</p>
                                         </div>
                                     </th>
-                                    <td>
-                                        <div class="event-img">
-                                            <img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">
-                                        </div>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<div class="event-img">--}}
+                                            {{--<img class="img-fluid" src="{{('frontend/img/team/creativity.png')}}" alt="">--}}
+                                        {{--</div>--}}
+                                    {{--</td>--}}
                                     <td>
                                         <div class="event-wrap">
                                             <h3><a href="{{url('register',$event['id'])}}">{{$event['title']}}</a></h3>
