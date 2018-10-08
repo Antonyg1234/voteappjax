@@ -134,7 +134,7 @@
                                         <button class="btn-primary" id="registration_submit" name="submit-form" type="submit">Send</button>
                                     </div>
                                 </form>
-                                <div id="msgalert" class="hidden"></div>
+                                <div><h4>Note: Please use @neosofttech.com/ @wwindia.com email id for registration.</h4></div>
                             </div>
                         </div>
                         <!-- /col-->
