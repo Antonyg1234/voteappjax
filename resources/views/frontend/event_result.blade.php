@@ -62,13 +62,13 @@
                                     <!-- /.col end-->
                                     <div class="col-lg-7 col-md-12">
                                         <div class="inner-content">
-                                            <h1>{{$winner['team_name']}}</h1><span><strong> @if($key == 0)
-                                                        <span class="month">Winner</span>
-                                                    @elseif($key == 1)
-                                                        <span class="month">1st Runners-Up</span>
-                                                    @else
-                                                        <span class="month">2nd Runners-up</span>
-                                                    @endif</strong></span>
+                                            <h1>{{$winner['team_name']}}&nbsp;<span><strong> @if($key == 0)
+                                                            <span class="month">Winner</span>
+                                                        @elseif($key == 1)
+                                                            <span class="month">1st Runners-Up</span>
+                                                        @else
+                                                            <span class="month">2nd Runners-up</span>
+                                                        @endif</strong></span></h1>
                                             <span>{{implode(', ', array_column($winner['members'],'name'))}}</span>
                                             <p>{{$winner['title']}}</p>
                                             <p class="mb-0">{!! $winner['description'] !!}</p>
