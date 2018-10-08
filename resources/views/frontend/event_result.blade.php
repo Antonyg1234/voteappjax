@@ -53,7 +53,7 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <iframe width="450" height="280" src="https://www.youtube.com/embed/sXmucZx5_ig" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                                    <iframe width="450" height="280" src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                                                     </iframe>
                                                 @endif
                                             @endforeach
@@ -63,7 +63,7 @@
                                     <div class="col-lg-7 col-md-12">
                                         <div class="inner-content">
                                             <h1>{{$winner['team_name']}}</h1>
-                                            <span>{{$winner['contact_person'].', '.implode(', ', array_column($winner['members'],'name'))}}</span>
+                                            <span>{{implode(', ', array_column($winner['members'],'name'))}}</span>
                                             <p>{{$winner['title']}}</p>
                                             <p class="mb-0">{!! $winner['description'] !!}</p>
                                             @if($key == 0)
