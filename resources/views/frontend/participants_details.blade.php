@@ -40,7 +40,7 @@
                                     </a>
                                 @endif
                             @else
-                                <iframe width="350"  src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                <iframe width="350" height="250"  src="{{$asset['assets']}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                                 </iframe>
                             @endif
                         @endforeach
