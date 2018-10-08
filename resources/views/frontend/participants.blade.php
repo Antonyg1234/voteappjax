@@ -35,7 +35,7 @@
                             @endif
                             @php $today = \Carbon\Carbon::now();
                             @endphp
-                            @if(($teamassets))
+                            @if($participant_teams)
                             @if($event['voting_end_date']['smaller'])
                                 <button class="sub-btn btn-primary">
                                     <a href="{{url('participants/result',$event['id'])}}">View Event Result</a>
@@ -103,7 +103,7 @@
                     @endif
                 @endforeach
             </div>
-            @if(!($teamassets))
+            @if(!($participant_teams))
                     <h6 class="text-center">Sorry, No content to display.</h6>
             @endif
 

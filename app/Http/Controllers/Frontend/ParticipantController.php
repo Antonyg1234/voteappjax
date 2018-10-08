@@ -15,19 +15,13 @@ use PhpParser\Node\Stmt\Return_;
 class ParticipantController extends Controller
 {
     public function index(Request $request){
-        $participant_teams = EventParticipant::where('event_id','=',$request->id)->get();
+//        $participant_teams = EventParticipant::with(['assets' => function($query){ $query->whereNotNull('assets'); }])->where('event_id','=',$request->id)->get();
 
-        $teamassets = 0;
-        foreach($participant_teams as $key => $team){
-            $assets = EventParticipantsAsset::where('event_p_id','=',$team['id'])->get();
-            $team['assets'] = $assets->toArray();
-            if($team['assets'])
-                $teamassets++;
-        }
+        $participant_teams = EventParticipant::has('assets')->with('assets')->where('event_id','=',$request->id)->get();
+
         $event = EventMaster::where('id','=',$request->id)->first()->toArray();
-//        dd($event);
 
-        return view('frontend.participants',compact('participant_teams','event','teamassets'));
+        return view('frontend.participants',compact('participant_teams','event'));
     }
 
     public function details(Request $request){
