@@ -17,7 +17,13 @@ class PreventRegisterUrl
      */
     public function handle($request, Closure $next)
     {
-        $event = EventMaster::select('event_date')->where('id',$request->register)->first();
+//        dd($request->register);
+        if($request->event_id){
+            $event = EventMaster::select('event_date')->where('id',$request->event_id)->first();
+        }else{
+            $event = EventMaster::select('event_date')->where('id',$request->register)->first();
+        }
+
         if (Carbon::now()->format('Y-m-d h:i:s') <  $event['event_date']){
             return $next($request);
         }else{
