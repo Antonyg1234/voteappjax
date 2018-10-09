@@ -134,7 +134,8 @@
                                         <button class="btn-primary" id="registration_submit" name="submit-form" type="submit">Send</button>
                                     </div>
                                 </form>
-                                <div><h4>Note: Please use @neosofttech.com/ @wwindia.com email id for registration.</h4></div>
+                                <br/>
+                                <div class="text-center"><span><strong>Note: Please use @neosofttech.com/ @wwindia.com email id for registration.</strong></span></div>
                             </div>
                         </div>
                         <!-- /col-->
